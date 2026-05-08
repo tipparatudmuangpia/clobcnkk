@@ -1,0 +1,4728 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>กรอบ CLO กลาง — BCNKK · คู่มือออนไลน์สำหรับอาจารย์ผู้สอนและอาจารย์พี่เลี้ยง</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;500;700;900&family=Sarabun:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* Color tokens — Academic Editorial palette */
+  --bg: #FAF6EE;
+  --bg-deep: #F0E8D8;
+  --surface: #FFFFFF;
+  --surface-elevated: #FEFCF7;
+  --primary: #0A4A5E;
+  --primary-dark: #062F3C;
+  --primary-soft: #D5E4E8;
+  --accent: #B85C2E;
+  --accent-soft: #F2DDD0;
+  --gold: #C9A227;
+  --gold-soft: #F4E9C4;
+  --text: #1A1A1A;
+  --text-muted: #5C5C5C;
+  --text-light: #8A8A8A;
+  --border: #D8CFC0;
+  --border-subtle: #E8E0CF;
+  --shadow-sm: 0 1px 2px rgba(10, 30, 40, 0.04);
+  --shadow-md: 0 4px 12px rgba(10, 30, 40, 0.08);
+  --shadow-lg: 0 12px 32px rgba(10, 30, 40, 0.12);
+  
+  /* Domain colors */
+  --d-cognitive: #1A6B7E;
+  --d-cognitive-bg: #DCEBEE;
+  --d-affective: #B8881F;
+  --d-affective-bg: #F4E9C4;
+  --d-psychomotor: #B85C2E;
+  --d-psychomotor-bg: #F2DDD0;
+  
+  /* IRPM */
+  --irpm-i: #6B9BD2;
+  --irpm-r: #4A7BA8;
+  --irpm-p: #C9A227;
+  --irpm-m: #B85C2E;
+  
+  /* Typography */
+  --font-display: "Noto Serif Thai", "Charter", "Iowan Old Style", Georgia, serif;
+  --font-body: "Sarabun", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+  
+  /* Layout */
+  --sidebar-w: 280px;
+  --header-h: 72px;
+  --content-max: 1280px;
+}
+
+/* === Reset === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  background-image: 
+    radial-gradient(circle at 80% 0%, rgba(201, 162, 39, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 0% 70%, rgba(10, 74, 94, 0.03) 0%, transparent 50%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--accent); }
+img, svg { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+input, select, textarea { font-family: inherit; font-size: inherit; }
+
+/* === Header === */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: rgba(250, 246, 238, 0.92);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 1.5rem;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-shrink: 0;
+}
+.brand-mark {
+  width: 44px; height: 44px;
+  background: var(--primary);
+  color: var(--bg);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 900;
+  position: relative;
+  overflow: hidden;
+}
+.brand-mark::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--gold);
+}
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--primary-dark);
+  letter-spacing: -0.01em;
+}
+.brand-tag { font-size: 0.78rem; color: var(--text-muted); }
+
+.global-search {
+  flex: 1;
+  max-width: 420px;
+  margin-left: auto;
+  position: relative;
+}
+.global-search input {
+  width: 100%;
+  height: 42px;
+  padding: 0 1rem 0 2.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: all 0.2s;
+}
+.global-search input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+.global-search::before {
+  content: '⌕';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+.search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0; right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-height: 60vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  display: none;
+}
+.search-results.open { display: block; }
+.search-result {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.search-result:hover { background: var(--bg-deep); }
+.search-result:last-child { border-bottom: none; }
+.search-result-type {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.search-result-text { font-size: 0.92rem; color: var(--text); margin-top: 2px; }
+
+.mobile-toggle {
+  display: none;
+  width: 42px; height: 42px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-toggle svg { width: 22px; height: 22px; }
+
+/* === Layout === */
+.layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* === Sidebar === */
+.sidebar {
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+  height: calc(100vh - var(--header-h) - 3rem);
+  overflow-y: auto;
+  padding: 1.5rem 0;
+}
+.sidebar-section { margin-bottom: 2rem; }
+.sidebar-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  padding: 0 0.5rem;
+}
+.nav-list { list-style: none; }
+.nav-list li { margin-bottom: 2px; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  position: relative;
+}
+.nav-link:hover { background: var(--bg-deep); color: var(--text); }
+.nav-link.active {
+  background: var(--primary);
+  color: var(--bg);
+}
+.nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 24px;
+  background: var(--gold);
+  border-radius: 0 4px 4px 0;
+}
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+/* === Main === */
+main {
+  padding: 1.5rem 0 4rem;
+  min-width: 0;
+}
+.page { display: none; animation: fadeIn 0.3s; }
+.page.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: var(--gold);
+}
+.page-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.2;
+  color: var(--primary-dark);
+  letter-spacing: -0.01em;
+}
+.page-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+/* === Hero (Home) === */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--bg);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+  opacity: 0.18;
+  border-radius: 50%;
+  transform: translate(40%, -40%);
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  max-width: 720px;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.hero-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  max-width: 600px;
+  opacity: 0.92;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.hero-actions {
+  display: flex;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+  position: relative;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--primary-dark);
+}
+.btn-primary:hover { background: #D8B142; transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--bg);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* === Stats grid === */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 36px;
+  height: 3px;
+  background: var(--gold);
+}
+.stat-number {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 2.25rem;
+  color: var(--primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* === Card grid === */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.75rem;
+  transition: all 0.25s;
+  cursor: pointer;
+  position: relative;
+}
+.feature-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.feature-icon {
+  width: 44px; height: 44px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+.feature-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+.feature-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* === Section heading === */
+.section {
+  margin-bottom: 3rem;
+}
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-number {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: var(--gold-soft);
+  color: var(--accent);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  max-width: 760px;
+  line-height: 1.7;
+}
+
+/* === Bloom theory === */
+.bloom-domains {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+.bloom-domain {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-left: 4px solid var(--primary);
+}
+.bloom-domain.cognitive { border-left-color: var(--d-cognitive); }
+.bloom-domain.affective { border-left-color: var(--d-affective); }
+.bloom-domain.psychomotor { border-left-color: var(--d-psychomotor); }
+.bloom-domain h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
+  color: var(--primary-dark);
+}
+.bloom-domain h3 .en { font-style: italic; color: var(--text-muted); font-size: 0.9rem; font-weight: 400; }
+.bloom-levels { margin-top: 1rem; }
+.bloom-level {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--border-subtle);
+  font-size: 0.92rem;
+}
+.bloom-level:last-child { border-bottom: none; }
+.bloom-level-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+.bloom-level-name { color: var(--text); }
+.bloom-level-name strong {
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+/* === IRPM cards === */
+.irpm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.irpm-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.irpm-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--bg);
+  margin-bottom: 1rem;
+}
+.irpm-i .irpm-badge { background: var(--irpm-i); }
+.irpm-r .irpm-badge { background: var(--irpm-r); }
+.irpm-p .irpm-badge { background: var(--irpm-p); }
+.irpm-m .irpm-badge { background: var(--irpm-m); }
+.irpm-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+.irpm-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+.irpm-year {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* === Tables === */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  min-width: 720px;
+}
+table.data-table thead {
+  background: var(--primary);
+  color: var(--bg);
+}
+table.data-table th {
+  text-align: left;
+  font-weight: 600;
+  padding: 0.875rem 1rem;
+  font-size: 0.92rem;
+  border-bottom: 2px solid var(--gold);
+}
+table.data-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: top;
+  line-height: 1.55;
+}
+table.data-table tbody tr:hover { background: var(--bg-deep); }
+table.data-table tbody tr:last-child td { border-bottom: none; }
+
+/* === Verb Bank Filters === */
+.filter-bar {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.filter-group label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.filter-group select, .filter-group input {
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.92rem;
+  color: var(--text);
+  min-width: 160px;
+}
+.filter-group input { min-width: 200px; }
+.filter-clear {
+  margin-left: auto;
+  padding: 0.5rem 1rem;
+  color: var(--accent);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: transparent;
+}
+.filter-clear:hover { background: var(--accent); color: var(--bg); }
+
+/* === Verb cards === */
+.verb-results {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.verb-group {
+  border-bottom: 1px solid var(--border-subtle);
+}
+.verb-group:last-child { border-bottom: none; }
+.verb-group-header {
+  padding: 1rem 1.5rem;
+  background: var(--bg-deep);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.verb-group-domain {
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  color: var(--bg);
+  background: var(--primary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.verb-group-level {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.verb-group-irpm {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+.verb-list {
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.verb-col-label {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.verb-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.verb-tag {
+  font-size: 0.88rem;
+  padding: 0.3rem 0.65rem;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  color: var(--text);
+  font-weight: 500;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.verb-tag:hover {
+  background: var(--primary);
+  color: var(--bg);
+  border-color: var(--primary);
+}
+.verb-tag.en { font-style: italic; font-family: var(--font-body); }
+
+/* === PLO Tabs === */
+.plo-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+.plo-tab {
+  padding: 0.6rem 1rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  font-family: var(--font-mono);
+}
+.plo-tab:hover { background: var(--bg-deep); color: var(--text); }
+.plo-tab.active {
+  background: var(--primary);
+  color: var(--bg);
+  border-color: var(--primary);
+}
+
+.plo-content {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+.plo-statement {
+  background: var(--gold-soft);
+  border-left: 4px solid var(--gold);
+  padding: 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.plo-statement strong { color: var(--primary-dark); }
+.plo-domain {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  background: var(--primary-soft);
+  color: var(--primary);
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* Component (T/L/P) tabs */
+.component-tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+}
+.component-tab {
+  padding: 0.7rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  margin-bottom: -1px;
+}
+.component-tab:hover { color: var(--text); }
+.component-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--gold);
+}
+.component-tab .count {
+  display: inline-block;
+  font-family: var(--font-mono);
+  background: var(--bg-deep);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 10px;
+  margin-left: 0.4rem;
+  font-weight: 600;
+}
+.component-tab.active .count { background: var(--gold); color: var(--primary-dark); }
+
+/* CLO cards */
+.clo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.clo-card {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s;
+}
+.clo-card:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); }
+.clo-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.875rem;
+  flex-wrap: wrap;
+}
+.clo-code {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--primary);
+  color: var(--bg);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.clo-statement {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.6;
+  min-width: 280px;
+}
+.clo-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.meta-pill {
+  font-size: 0.78rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.meta-pill.cognitive { background: var(--d-cognitive-bg); color: var(--d-cognitive); }
+.meta-pill.affective { background: var(--d-affective-bg); color: var(--d-affective); }
+.meta-pill.psychomotor { background: var(--d-psychomotor-bg); color: var(--d-psychomotor); }
+.meta-pill.bloom-level { background: var(--bg-deep); color: var(--text); }
+.meta-pill.irpm { background: var(--accent-soft); color: var(--accent); font-family: var(--font-mono); }
+.meta-pill.ksa { background: var(--primary-soft); color: var(--primary); font-family: var(--font-mono); }
+
+.clo-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+.clo-detail-block { padding: 0.75rem 1rem; background: var(--bg-deep); border-radius: 8px; }
+.clo-detail-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.clo-detail-list { font-size: 0.88rem; line-height: 1.6; }
+.clo-detail-list li {
+  list-style: none;
+  padding: 0.15rem 0;
+  position: relative;
+  padding-left: 1rem;
+}
+.clo-detail-list li::before {
+  content: '◦';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.clo-description {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border-subtle);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* === Builder Tool === */
+.builder {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.builder-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.builder-step {
+  position: relative;
+}
+.step-num {
+  display: inline-block;
+  width: 28px; height: 28px;
+  background: var(--gold);
+  color: var(--primary-dark);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.88rem;
+  margin-bottom: 0.6rem;
+}
+.step-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+.builder-step select, .builder-step input {
+  width: 100%;
+  padding: 0.7rem 0.875rem;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: border 0.2s;
+}
+.builder-step select:focus { outline: none; border-color: var(--primary); }
+
+#builderResults {
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  display: none;
+}
+#builderResults.visible { display: block; }
+.builder-result-section {
+  margin-bottom: 1.75rem;
+}
+.builder-result-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.builder-result-title .badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: var(--gold-soft);
+  color: var(--accent);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.builder-output {
+  background: var(--primary-dark);
+  color: var(--bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  font-family: var(--font-display);
+  line-height: 1.6;
+  border-top: 4px solid var(--gold);
+}
+.builder-output-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+.builder-output-text {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+.builder-output-placeholder {
+  background: rgba(201, 162, 39, 0.2);
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  border-bottom: 2px dashed var(--gold);
+}
+.copy-btn {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--bg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: var(--gold); color: var(--primary-dark); border-color: var(--gold); }
+.copy-btn.copied { background: var(--gold); color: var(--primary-dark); }
+
+.empty-state {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+.empty-state .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+.empty-state p { font-size: 0.95rem; }
+
+/* === Worked Examples === */
+.example-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.example-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--bg);
+  padding: 1.75rem 2rem;
+  position: relative;
+}
+.example-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100px;
+  height: 3px;
+  background: var(--gold);
+}
+.example-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.example-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.example-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  opacity: 0.9;
+}
+.example-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.example-body {
+  padding: 1.75rem 2rem;
+}
+.example-desc {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  line-height: 1.65;
+}
+
+/* === Templates / Checklist === */
+.template-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+.template-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.75rem;
+}
+.checklist { list-style: none; }
+.checklist li {
+  padding: 0.5rem 0 0.5rem 2rem;
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.15s;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li:hover { background: var(--bg-deep); }
+.checklist li::before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  font-size: 1.25rem;
+  color: var(--primary);
+  font-weight: 600;
+  top: 0.4rem;
+}
+.checklist li.checked::before { content: '☑'; color: var(--gold); }
+.checklist li.checked { color: var(--text-muted); text-decoration: line-through; text-decoration-color: var(--gold); text-decoration-thickness: 2px; }
+
+/* === About === */
+.about-content {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 2.5rem;
+  border: 1px solid var(--border-subtle);
+}
+.about-content p {
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+.about-content h3 {
+  font-family: var(--font-display);
+  color: var(--primary-dark);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+}
+.about-meta {
+  background: var(--bg-deep);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+.about-meta strong { color: var(--primary); font-weight: 600; }
+
+/* === Footer === */
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 4rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.site-footer .credit {
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+/* === Mobile === */
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+    gap: 1.5rem;
+  }
+  .sidebar {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    background: var(--bg);
+    padding: 1.5rem 1rem;
+    border-right: 1px solid var(--border);
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+    height: auto;
+  }
+  .sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+  .mobile-toggle { display: inline-flex; }
+  .global-search { max-width: none; }
+  .brand-text { display: none; }
+  .nav-link.active::before { display: none; }
+  .clo-detail { grid-template-columns: 1fr; }
+  .verb-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 2rem 1.5rem; }
+  .page-title { font-size: 1.5rem; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .builder { padding: 1.25rem; }
+}
+
+/* Print */
+@media print {
+  .site-header, .sidebar, .mobile-toggle, .global-search, .builder-step, .copy-btn { display: none !important; }
+  .layout { display: block; padding: 0; }
+  .page { display: block !important; page-break-before: always; }
+  body { background: white; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+  
+  <a href="#home" class="brand">
+    <div class="brand-mark">CLO</div>
+    <div class="brand-text">
+      <div class="brand-name">CLO กลาง · BCNKK</div>
+      <div class="brand-tag">คู่มือออนไลน์ · หลักสูตร 2567</div>
+    </div>
+  </a>
+  
+  <div class="global-search">
+    <input type="search" id="globalSearch" placeholder="ค้นหา CLO, คำกริยา, PLO ..." autocomplete="off">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-label">การใช้งานหลัก</div>
+    <ul class="nav-list">
+      <li><a href="#home" class="nav-link" data-page="home">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        หน้าแรก
+      </a></li>
+      <li><a href="#theory" class="nav-link" data-page="theory">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        ทฤษฎี Bloom · IRPM
+      </a></li>
+      <li><a href="#verbs" class="nav-link" data-page="verbs">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        คลังคำกริยา
+      </a></li>
+      <li><a href="#clos" class="nav-link" data-page="clos">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        CLO กลาง 10 PLO
+      </a></li>
+    </ul>
+  </div>
+  
+  <div class="sidebar-section">
+    <div class="sidebar-label">เครื่องมือ</div>
+    <ul class="nav-list">
+      <li><a href="#builder" class="nav-link" data-page="builder">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        เครื่องมือออกแบบ CLO
+      </a></li>
+      <li><a href="#examples" class="nav-link" data-page="examples">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        ตัวอย่างรายวิชา
+      </a></li>
+      <li><a href="#templates" class="nav-link" data-page="templates">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Template · Checklist
+      </a></li>
+    </ul>
+  </div>
+  
+  <div class="sidebar-section">
+    <div class="sidebar-label">ข้อมูล</div>
+    <ul class="nav-list">
+      <li><a href="#about" class="nav-link" data-page="about">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        เกี่ยวกับคู่มือนี้
+      </a></li>
+    </ul>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<main>
+
+<!-- ============ PAGE: HOME ============ -->
+<section class="page" id="page-home">
+  <div class="hero">
+    <div class="hero-eyebrow">CLO Framework · Curriculum 2567</div>
+    <h1 class="hero-title">กรอบ CLO กลาง สำหรับหลักสูตรพยาบาลศาสตรบัณฑิต</h1>
+    <p class="hero-subtitle">
+      คู่มือออนไลน์สำหรับอาจารย์ผู้สอนและอาจารย์พี่เลี้ยงในการออกแบบ Course Learning Outcomes ที่สอดคล้องกับ PLO ของหลักสูตร อิงตาม Bloom's Revised Taxonomy และกรอบ IRPM (Introduction–Reinforcement–Practice–Mastery)
+    </p>
+    <div class="hero-actions">
+      <a href="#builder" class="btn btn-primary" data-nav="builder">
+        เริ่มออกแบบ CLO →
+      </a>
+      <a href="#clos" class="btn btn-outline" data-nav="clos">
+        ดู CLO กลางทั้งหมด
+      </a>
+    </div>
+  </div>
+  
+  <div class="stats-grid" id="statsGrid"></div>
+  
+  <div class="section">
+    <h2 class="section-heading">ส่วนต่าง ๆ ในคู่มือ</h2>
+    <p class="section-desc">เลือกใช้แต่ละส่วนตามขั้นตอนของการออกแบบ CLO รายวิชา ตั้งแต่การทำความเข้าใจกรอบทฤษฎีไปจนถึงการนำไปใช้จริง</p>
+    <div class="card-grid" id="featuresGrid"></div>
+  </div>
+</section>
+
+<!-- ============ PAGE: THEORY ============ -->
+<section class="page" id="page-theory">
+  <div class="page-header">
+    <div class="page-eyebrow">ส่วนที่ 2</div>
+    <h1 class="page-title">กรอบแนวคิดเชิงทฤษฎี</h1>
+    <p class="page-subtitle">การพัฒนา CLO ที่มีคุณภาพต้องอิงกรอบแนวคิดที่ได้รับการยอมรับ — Bloom's Revised Taxonomy (Anderson &amp; Krathwohl, 2001) ใช้จัดระดับความซับซ้อนของการเรียนรู้ ขณะที่ IRPM กำหนดระดับการพัฒนาตลอดช่วงเวลาในหลักสูตร</p>
+  </div>
+  
+  <div class="section">
+    <h2 class="section-heading"><span class="section-number">2.1</span> Bloom's Revised Taxonomy</h2>
+    <p class="section-desc">จำแนกผลลัพธ์การเรียนรู้ออกเป็น 3 โดเมน คลิกแต่ละโดเมนเพื่อดูระดับและคำกริยาที่ใช้บ่อย</p>
+    <div class="bloom-domains" id="bloomDomains"></div>
+  </div>
+  
+  <div class="section">
+    <h2 class="section-heading"><span class="section-number">2.2</span> กรอบ IRPM</h2>
+    <p class="section-desc">ระดับการพัฒนาของผู้เรียนตลอดช่วงเวลาของหลักสูตร — ผู้เรียนต้องผ่าน I → R → P → M ก่อนบรรลุ PLO</p>
+    <div class="irpm-grid" id="irpmGrid"></div>
+  </div>
+  
+  <div class="section">
+    <h2 class="section-heading"><span class="section-number">2.3</span> ความสัมพันธ์ IRPM × Bloom</h2>
+    <p class="section-desc">แนวทางการจับคู่ระหว่างระดับ IRPM กับโดเมน Bloom — เป็นแนวทางทั่วไป สามารถปรับให้สอดคล้องกับลักษณะรายวิชาได้</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 18%">ระดับ IRPM</th>
+            <th>Cognitive (พุทธิพิสัย)</th>
+            <th>Affective (จิตพิสัย)</th>
+            <th>Psychomotor (ทักษะพิสัย)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>I</strong> (Introduction)<br><small>ปี 1–2</small></td>
+              <td>Remember + Understand</td>
+              <td>Receiving + early Responding</td>
+              <td>Perception + Set + early Guided Response</td></tr>
+          <tr><td><strong>R</strong> (Reinforcement)<br><small>ปี 2–3</small></td>
+              <td>Understand + Apply + early Analyze</td>
+              <td>Responding + early Valuing</td>
+              <td>Guided Response + early Mechanism</td></tr>
+          <tr><td><strong>P</strong> (Practice)<br><small>ปี 3–4</small></td>
+              <td>Apply + Analyze + Evaluate + early Create</td>
+              <td>Valuing + Organization</td>
+              <td>Mechanism + early Complex Overt Response</td></tr>
+          <tr><td><strong>M</strong> (Mastery)<br><small>ปี 4</small></td>
+              <td>Evaluate + Create</td>
+              <td>Organization + Characterization</td>
+              <td>Complex Overt Response + Adaptation + Origination</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE: VERBS ============ -->
+<section class="page" id="page-verbs">
+  <div class="page-header">
+    <div class="page-eyebrow">ภาคผนวก ก</div>
+    <h1 class="page-title">คลังคำกริยา (Action Verbs Bank)</h1>
+    <p class="page-subtitle">รวมคำกริยาภาษาไทย-อังกฤษที่ใช้ในการเขียน CLO ตามระดับ Bloom และ IRPM ใช้ filter เพื่อค้นหาคำกริยาที่ตรงกับระดับการเรียนรู้ที่ต้องการ</p>
+  </div>
+  
+  <div class="filter-bar">
+    <div class="filter-group">
+      <label>โดเมน</label>
+      <select id="filterDomain">
+        <option value="">ทั้งหมด</option>
+        <option value="Cognitive">Cognitive (พุทธิพิสัย)</option>
+        <option value="Affective">Affective (จิตพิสัย)</option>
+        <option value="Psychomotor">Psychomotor (ทักษะพิสัย)</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>IRPM</label>
+      <select id="filterIrpm">
+        <option value="">ทั้งหมด</option>
+        <option value="I">I (Introduction)</option>
+        <option value="R">R (Reinforcement)</option>
+        <option value="P">P (Practice)</option>
+        <option value="M">M (Mastery)</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>ค้นหา</label>
+      <input type="search" id="filterVerb" placeholder="พิมพ์คำกริยาภาษาไทยหรืออังกฤษ">
+    </div>
+    <button class="filter-clear" id="filterClear">ล้างตัวกรอง</button>
+  </div>
+  
+  <div class="verb-results" id="verbResults"></div>
+</section>
+
+<!-- ============ PAGE: CLOS ============ -->
+<section class="page" id="page-clos">
+  <div class="page-header">
+    <div class="page-eyebrow">ส่วนที่ 4</div>
+    <h1 class="page-title">CLO กลางในแต่ละ PLO</h1>
+    <p class="page-subtitle">CLO กลาง 86 ตัว ครอบคลุม 10 PLO × 3 ภาค (ทฤษฎี · ทดลอง · ปฏิบัติ) คลิกที่ PLO เพื่อดูรายละเอียด</p>
+  </div>
+  
+  <div class="plo-tabs" id="ploTabs"></div>
+  
+  <div id="ploContent"></div>
+</section>
+
+<!-- ============ PAGE: BUILDER ============ -->
+<section class="page" id="page-builder">
+  <div class="page-header">
+    <div class="page-eyebrow">เครื่องมือ</div>
+    <h1 class="page-title">เครื่องมือออกแบบ CLO รายวิชา</h1>
+    <p class="page-subtitle">เลือก PLO + ระดับ IRPM + ภาคของรายวิชา ระบบจะแนะนำ Bloom level, action verbs, วิธีสอน และวิธีประเมินที่สอดคล้อง พร้อมร่างประโยค CLO ให้นำไปใช้</p>
+  </div>
+  
+  <div class="builder">
+    <div class="builder-steps">
+      <div class="builder-step">
+        <span class="step-num">1</span>
+        <div class="step-label">เลือก PLO ที่รายวิชารับผิดชอบ</div>
+        <select id="bPlo"><option value="">-- เลือก PLO --</option></select>
+      </div>
+      <div class="builder-step">
+        <span class="step-num">2</span>
+        <div class="step-label">ระดับ IRPM ของรายวิชา</div>
+        <select id="bIrpm">
+          <option value="">-- เลือก IRPM --</option>
+          <option value="I">I — Introduction (ปี 1–2)</option>
+          <option value="R">R — Reinforcement (ปี 2–3)</option>
+          <option value="P">P — Practice (ปี 3–4)</option>
+          <option value="M">M — Mastery (ปี 4)</option>
+        </select>
+      </div>
+      <div class="builder-step">
+        <span class="step-num">3</span>
+        <div class="step-label">ภาคของรายวิชา</div>
+        <select id="bComponent">
+          <option value="">-- เลือกภาค --</option>
+          <option value="Theory">ทฤษฎี (Theory)</option>
+          <option value="Lab">ทดลอง (Lab/Skills Lab)</option>
+          <option value="Practice">ปฏิบัติ (Clinical Practice)</option>
+        </select>
+      </div>
+    </div>
+    
+    <div id="builderResults">
+      <div class="builder-result-section">
+        <div class="builder-result-title">CLO กลางที่สอดคล้อง <span class="badge" id="bMatchCount">0 ตัว</span></div>
+        <div id="bMatchedClos"></div>
+      </div>
+      
+      <div class="builder-result-section">
+        <div class="builder-result-title">Action Verbs ที่แนะนำ</div>
+        <div id="bRecommendedVerbs"></div>
+      </div>
+      
+      <div class="builder-result-section">
+        <div class="builder-result-title">ตัวอย่างประโยค CLO ที่ร่างให้</div>
+        <div class="builder-output">
+          <div class="builder-output-label">Template</div>
+          <div class="builder-output-text" id="bOutputText"></div>
+          <button class="copy-btn" id="copyBtn">คัดลอก</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="empty-state" id="bEmptyState">
+      <div class="icon">⚙</div>
+      <p>เลือก PLO + IRPM + ภาคของรายวิชาด้านบน ระบบจะแสดงคำแนะนำให้ทันที</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE: EXAMPLES ============ -->
+<section class="page" id="page-examples">
+  <div class="page-header">
+    <div class="page-eyebrow">ส่วนที่ 6</div>
+    <h1 class="page-title">ตัวอย่างการนำไปใช้ — Worked Examples</h1>
+    <p class="page-subtitle">3 รายวิชาตัวอย่างที่ครอบคลุมรายวิชาทฤษฎี ทฤษฎี+ทดลอง และปฏิบัติทางคลินิก แสดงการ map ระหว่าง CLO ของรายวิชากับ CLO กลาง พร้อมวิธีสอนและการประเมินที่สอดคล้อง</p>
+  </div>
+  <div id="examplesContent"></div>
+</section>
+
+<!-- ============ PAGE: TEMPLATES ============ -->
+<section class="page" id="page-templates">
+  <div class="page-header">
+    <div class="page-eyebrow">ภาคผนวก ข · ค</div>
+    <h1 class="page-title">Template และ Checklist</h1>
+    <p class="page-subtitle">แม่แบบสำหรับเขียน CLO รายวิชาใน มคอ.3 และ Checklist ตรวจสอบคุณภาพก่อนนำเสนอต่อคณะกรรมการหลักสูตร</p>
+  </div>
+  
+  <div class="template-card">
+    <h3>แม่แบบตาราง CLO รายวิชา (Course CLO Template)</h3>
+    <p style="margin-bottom:1rem;color:var(--text-muted);">นำไปใช้ใน มคอ.3 — กรอกข้อมูลตามคอลัมน์ของแต่ละ CLO รายวิชา</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>CLO #</th>
+            <th>ข้อความ CLO รายวิชา</th>
+            <th>CLO กลาง</th>
+            <th>PLO</th>
+            <th>Bloom</th>
+            <th>IRPM</th>
+            <th>K/S/A</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>CLO 1</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>CLO 2</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>CLO 3</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>CLO 4</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>CLO 5</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="template-card">
+    <h3>Constructive Alignment Table (CLO × วิธีสอน × การประเมิน)</h3>
+    <p style="margin-bottom:1rem;color:var(--text-muted);">ตรวจสอบความสอดคล้องระหว่าง CLO กับวิธีสอนและการวัดประเมินผล</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>CLO #</th>
+            <th>วิธีสอน</th>
+            <th>การวัดและประเมิน</th>
+            <th>สัดส่วนคะแนน (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>CLO 1</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>CLO 2</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>CLO 3</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="template-card">
+    <h3>Checklist การออกแบบ CLO ที่ดี</h3>
+    <p style="margin-bottom:0.875rem;color:var(--text-muted);font-size:0.92rem;">คลิกแต่ละข้อเพื่อเช็ค — ใช้ตรวจสอบ CLO ก่อนนำเสนอต่อคณะกรรมการหลักสูตร</p>
+    <ul class="checklist" id="checklist"></ul>
+  </div>
+</section>
+
+<!-- ============ PAGE: ABOUT ============ -->
+<section class="page" id="page-about">
+  <div class="page-header">
+    <div class="page-eyebrow">เกี่ยวกับ</div>
+    <h1 class="page-title">เกี่ยวกับคู่มือออนไลน์นี้</h1>
+  </div>
+  
+  <div class="about-content">
+    <p>คู่มือออนไลน์ <strong>กรอบ CLO กลาง</strong> ฉบับนี้จัดทำขึ้นเพื่อสนับสนุนการพัฒนา Course Learning Outcomes (CLO) ของอาจารย์ผู้สอนและอาจารย์พี่เลี้ยงในหลักสูตรพยาบาลศาสตรบัณฑิต (หลักสูตรปรับปรุง พ.ศ. 2567) วิทยาลัยพยาบาลบรมราชชนนี ขอนแก่น (BCNKK) สถาบันพระบรมราชชนก กระทรวงสาธารณสุข</p>
+    
+    <h3>สำหรับใคร</h3>
+    <p>คู่มือนี้ออกแบบสำหรับ <strong>อาจารย์ผู้สอน</strong> ผู้รับผิดชอบรายวิชาทฤษฎี/ทดลอง/ปฏิบัติ และ <strong>อาจารย์พี่เลี้ยง (Preceptor)</strong> ในแหล่งฝึกปฏิบัติคลินิก ที่ต้องการพัฒนา CLO รายวิชาให้สอดคล้องกับ PLO ของหลักสูตรและเกณฑ์ AUN-QA Version 4.0</p>
+    
+    <h3>กรอบทฤษฎีที่ใช้</h3>
+    <p>คู่มือนี้อิงตาม <strong>Bloom's Revised Taxonomy</strong> (Anderson &amp; Krathwohl, 2001) ในการจัดระดับความซับซ้อนของการเรียนรู้ และกรอบ <strong>IRPM</strong> (Introduction–Reinforcement–Practice–Mastery) ในการกำหนดระดับการพัฒนาของผู้เรียนตลอดช่วงเวลาของหลักสูตร โดยใช้แนวคิด <em>Constructive Alignment</em> ของ Biggs &amp; Tang (2011) ในการเชื่อมโยง CLO × วิธีสอน × การประเมิน</p>
+    
+    <h3>วิธีใช้งาน</h3>
+    <p>เริ่มจากการอ่าน <strong>ทฤษฎี Bloom · IRPM</strong> เพื่อทำความเข้าใจกรอบแนวคิด → ใช้ <strong>คลังคำกริยา</strong> ในการเลือก action verbs → เลือก <strong>CLO กลาง</strong> ที่สอดคล้องกับ PLO และระดับ IRPM ของรายวิชา → ใช้ <strong>เครื่องมือออกแบบ CLO</strong> ในการร่าง CLO รายวิชา → ตรวจสอบกับ <strong>Checklist</strong> ก่อนนำเสนอใน มคอ.3</p>
+    
+    <h3>การอ้างอิง</h3>
+    <p>หากท่านนำคู่มือนี้ไปใช้ในการเผยแพร่หรืออ้างอิงในงานวิจัย/วิชาการ กรุณาอ้างอิงเป็น:</p>
+    <div class="about-meta">
+      <strong>การอ้างอิง:</strong><br>
+      วิทยาลัยพยาบาลบรมราชชนนี ขอนแก่น. (2568). <em>กรอบ CLO กลาง สำหรับหลักสูตรพยาบาลศาสตรบัณฑิต (หลักสูตรปรับปรุง พ.ศ. 2567): คู่มือออนไลน์สำหรับอาจารย์ผู้สอนและอาจารย์พี่เลี้ยง.</em> ขอนแก่น: คณะพยาบาลศาสตร์ สถาบันพระบรมราชชนก.<br><br>
+      <strong>ข้อมูลใน Platform:</strong><br>
+      • PLO: 10 ผลลัพธ์การเรียนรู้ระดับหลักสูตร<br>
+      • CLO กลาง: 86 ตัว (ทฤษฎี 38 · ทดลอง 20 · ปฏิบัติ 28)<br>
+      • คำกริยา: 118 คำกริยาไทย-อังกฤษ ครอบคลุม 3 โดเมน<br>
+      • วิธีสอน: 28 วิธี · การวัดประเมิน: 26 วิธี<br>
+      • Worked Examples: 3 รายวิชาครอบคลุมทฤษฎี ทดลอง ปฏิบัติ
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer class="site-footer">
+  <p>วิทยาลัยพยาบาลบรมราชชนนี ขอนแก่น · คณะพยาบาลศาสตร์ สถาบันพระบรมราชชนก</p>
+  <p class="credit">"การออกแบบ CLO ที่ดี เริ่มจากความเข้าใจ PLO อย่างถ่องแท้"</p>
+</footer>
+
+<!-- ============ DATA + LOGIC ============ -->
+<script>
+// === EMBEDDED DATA ===
+const DATA = {
+  "plos": {
+    "PLO1": {
+      "short": "ประยุกต์ความรู้ทางการพยาบาล การผดุงครรภ์ และศาสตร์ที่เกี่ยวข้อง",
+      "full": "ประยุกต์ความรู้ทางการพยาบาล การผดุงครรภ์และบูรณาการศาสตร์ที่เกี่ยวข้องในการให้บริการสุขภาพทุกช่วงวัยในภาวะปกติและเจ็บป่วย",
+      "domain": "Cognitive (K) เป็นหลัก + Psychomotor (S) สนับสนุน",
+      "sub_plos": [
+        "PLO1.1 ประยุกต์ความรู้พื้นฐานวิชาชีพการพยาบาลและศาสตร์ที่เกี่ยวข้อง",
+        "PLO1.2 บูรณาการศาสตร์ทางการพยาบาล การผดุงครรภ์ และศาสตร์ร่วม",
+        "PLO1.3 ใช้ภาษาในเชิงวิชาชีพในการเรียนรู้และปฏิบัติงาน"
+      ]
+    },
+    "PLO2": {
+      "short": "ปฏิบัติการพยาบาลและการผดุงครรภ์แบบองค์รวม",
+      "full": "ปฏิบัติการพยาบาลและการผดุงครรภ์แบบองค์รวมด้วยหัวใจความเป็นมนุษย์ โดยใช้กระบวนการพยาบาลบนหลักฐานเชิงประจักษ์ คำนึงถึงความปลอดภัย การใช้ยาอย่างสมเหตุผล ความหลากหลายทางวัฒนธรรม ภายใต้กฎหมายและจรรยาบรรณวิชาชีพ",
+      "domain": "Psychomotor (S) เป็นหลัก + Cognitive (K) + Affective (A) สนับสนุน",
+      "sub_plos": [
+        "PLO2.1 ปฏิบัติการพยาบาลแบบองค์รวมโดยใช้กระบวนการพยาบาล",
+        "PLO2.2 ปฏิบัติการพยาบาลบนหลักฐานเชิงประจักษ์",
+        "PLO2.3 ปฏิบัติการพยาบาลที่คำนึงถึงความปลอดภัยและการใช้ยาอย่างสมเหตุผล",
+        "PLO2.4 ปฏิบัติการพยาบาลที่ตอบสนองต่อความหลากหลายทางวัฒนธรรม ภายใต้กฎหมายและจรรยาบรรณ"
+      ]
+    },
+    "PLO3": {
+      "short": "คุณธรรม จริยธรรม จรรยาบรรณวิชาชีพ และสิทธิ",
+      "full": "แสดงออกถึงพฤติกรรมด้านคุณธรรม จริยธรรม จรรยาบรรณวิชาชีพ เจตคติที่ดีต่อวิชาชีพ และสิทธิของพยาบาล",
+      "domain": "Affective (A) เป็นหลัก",
+      "sub_plos": [
+        "PLO3.1 คุณธรรม จริยธรรม และจรรยาบรรณวิชาชีพ",
+        "PLO3.2 เจตคติที่ดีต่อวิชาชีพและการเคารพสิทธิ"
+      ]
+    },
+    "PLO4": {
+      "short": "การคิดขั้นสูง ตัดสินใจ แก้ปัญหา อย่างมีวิจารณญาณและสร้างสรรค์",
+      "full": "แสดงออกถึงการคิดขั้นสูง ในการตัดสินใจ แก้ปัญหา การคิดอย่างมีวิจารณญาณอย่างสร้างสรรค์",
+      "domain": "Cognitive (K) เป็นหลัก — Higher-Order Thinking",
+      "sub_plos": [
+        "PLO4.1 การคิดอย่างเป็นระบบ คิดวิเคราะห์ และคิดอย่างมีวิจารณญาณ",
+        "PLO4.2 การคิดสร้างสรรค์ คิดเชิงออกแบบ และการแก้ปัญหา"
+      ]
+    },
+    "PLO5": {
+      "short": "การวิจัยและนวัตกรรมการดูแลสุขภาพ",
+      "full": "ประยุกต์ใช้ความรู้ระเบียบวิธีวิจัยในการปฏิบัติการพยาบาล การผดุงครรภ์ และในการพัฒนานวัตกรรมการดูแลสุขภาพ",
+      "domain": "Cognitive + Psychomotor + Affective (จริยธรรมนักวิจัย)",
+      "sub_plos": [
+        "PLO5.1 ใช้ผลการวิจัย/หลักฐานเชิงประจักษ์ในการปฏิบัติการพยาบาล",
+        "PLO5.2 พัฒนานวัตกรรมการดูแลสุขภาพ"
+      ]
+    },
+    "PLO6": {
+      "short": "ภาวะผู้นำและการบริหารจัดการสุขภาวะชุมชน",
+      "full": "แสดงออกถึงการมีภาวะผู้นำ และสามารถบริหารจัดการสุขภาวะชุมชน",
+      "domain": "Affective + Psychomotor + Cognitive",
+      "sub_plos": [
+        "PLO6.1 ภาวะผู้นำ การประสานความร่วมมือ และการกล้าแสดงออก",
+        "PLO6.2 การบริหารจัดการสุขภาวะชุมชน"
+      ]
+    },
+    "PLO7": {
+      "short": "การสื่อสารและการใช้ภาษาที่เหมาะสมและเป็นสากล",
+      "full": "ใช้ภาษาในการสื่อสารได้อย่างเหมาะสมและเป็นสากล",
+      "domain": "Cognitive + Psychomotor + Affective",
+      "sub_plos": [
+        "PLO7.1 การสื่อสารด้วยภาษาไทย/ภาษาอังกฤษในเชิงวิชาการและวิชาชีพ",
+        "PLO7.2 การเขียนรายงาน บันทึก และนำเสนอ",
+        "PLO7.3 การสื่อสารกับผู้รับบริการ ทีมสุขภาพ และสาธารณชน"
+      ]
+    },
+    "PLO8": {
+      "short": "เทคโนโลยีสารสนเทศและดิจิทัลในการเรียนรู้และปฏิบัติงาน",
+      "full": "ใช้สื่อสารสนเทศและเทคโนโลยีดิจิทัลที่เหมาะสมในการเรียนรู้ และปฏิบัติการพยาบาลและการผดุงครรภ์",
+      "domain": "Cognitive + Psychomotor + Affective (จริยธรรมดิจิทัล)",
+      "sub_plos": [
+        "PLO8.1 การสืบค้นและประเมินข้อมูลสารสนเทศ",
+        "PLO8.2 การใช้เทคโนโลยีดิจิทัลในการสื่อสาร นำเสนอ และจัดการข้อมูล",
+        "PLO8.3 จริยธรรมและความปลอดภัยในการใช้เทคโนโลยีดิจิทัล"
+      ]
+    },
+    "PLO9": {
+      "short": "พัฒนาตนเองและประยุกต์ใช้หลักปรัชญาเศรษฐกิจพอเพียง",
+      "full": "วิเคราะห์จุดเด่นจุดด้อยของตนเอง และประยุกต์ใช้หลักปรัชญาเศรษฐกิจพอเพียงในการดำเนินชีวิตและการทำงาน เพื่อพัฒนาตนเองให้ทันต่อสภาพการณ์ที่เปลี่ยนแปลง",
+      "domain": "Affective เป็นหลัก + Cognitive (วิเคราะห์ตนเอง) สนับสนุน",
+      "sub_plos": [
+        "PLO9.1 การวิเคราะห์ตนเองและพัฒนาตนเองอย่างต่อเนื่อง",
+        "PLO9.2 การประยุกต์ใช้หลักปรัชญาเศรษฐกิจพอเพียง (3 ห่วง 2 เงื่อนไข)"
+      ]
+    },
+    "PLO10": {
+      "short": "การประกอบการด้านสุขภาพ",
+      "full": "ประยุกต์ใช้แนวคิดการเป็นผู้ประกอบการด้านสุขภาพในการปฏิบัติงานได้อย่างเหมาะสม",
+      "domain": "Cognitive + Psychomotor + Affective (จิตผู้ประกอบการ)",
+      "sub_plos": [
+        "PLO10.1 การวิเคราะห์โอกาสและคุณค่าทางธุรกิจ/บริการสุขภาพ",
+        "PLO10.2 การออกแบบและพัฒนาบริการ/นวัตกรรมการประกอบการด้านสุขภาพ"
+      ]
+    }
+  },
+  "actionVerbs": {
+    "Cognitive": {
+      "Remember": {
+        "thai": [
+          "จำ",
+          "ระบุ",
+          "บอก",
+          "เลือก",
+          "จดจำ",
+          "ทบทวน",
+          "บอกชื่อ",
+          "เขียน (รายชื่อ)",
+          "ระบุชนิด",
+          "บอกความหมาย"
+        ],
+        "english": [
+          "recall",
+          "list",
+          "identify",
+          "name",
+          "recognize",
+          "define",
+          "label",
+          "select",
+          "state",
+          "match"
+        ],
+        "irpm": "I"
+      },
+      "Understand": {
+        "thai": [
+          "อธิบาย",
+          "สรุป",
+          "ตีความ",
+          "บรรยาย",
+          "ยกตัวอย่าง",
+          "จำแนก",
+          "เปรียบเทียบ (พื้นฐาน)",
+          "อธิบายเชื่อมโยง",
+          "แปลความ"
+        ],
+        "english": [
+          "explain",
+          "describe",
+          "summarize",
+          "interpret",
+          "exemplify",
+          "classify",
+          "infer",
+          "paraphrase",
+          "translate"
+        ],
+        "irpm": "I → R"
+      },
+      "Apply": {
+        "thai": [
+          "ประยุกต์ใช้",
+          "ใช้",
+          "ดำเนินการ",
+          "นำไปใช้",
+          "สาธิต",
+          "คำนวณ",
+          "ใช้กระบวนการ",
+          "ปฏิบัติ (เชิงคิด)",
+          "เลือกใช้",
+          "วางแผน (เบื้องต้น)"
+        ],
+        "english": [
+          "apply",
+          "use",
+          "implement",
+          "demonstrate",
+          "execute",
+          "carry out",
+          "compute",
+          "operate",
+          "employ"
+        ],
+        "irpm": "R → P"
+      },
+      "Analyze": {
+        "thai": [
+          "วิเคราะห์",
+          "เปรียบเทียบและจำแนก",
+          "แยกแยะ",
+          "ตรวจสอบ",
+          "วินิจฉัย",
+          "หาความสัมพันธ์",
+          "จัดประเภท",
+          "แตกแยก (เป็นองค์ประกอบ)"
+        ],
+        "english": [
+          "analyze",
+          "differentiate",
+          "compare",
+          "contrast",
+          "examine",
+          "diagnose",
+          "deconstruct",
+          "categorize",
+          "organize"
+        ],
+        "irpm": "R → P"
+      },
+      "Evaluate": {
+        "thai": [
+          "ประเมิน",
+          "ตัดสิน",
+          "วิจารณ์",
+          "วินิจฉัย (ขั้นสูง)",
+          "ตรวจสอบและประเมิน",
+          "ให้คะแนน",
+          "ตัดสินใจอย่างมีวิจารณญาณ",
+          "ทบทวนเชิงประจักษ์"
+        ],
+        "english": [
+          "evaluate",
+          "judge",
+          "critique",
+          "appraise",
+          "justify",
+          "assess",
+          "validate",
+          "verify"
+        ],
+        "irpm": "P → M"
+      },
+      "Create": {
+        "thai": [
+          "ออกแบบ",
+          "สร้าง",
+          "พัฒนา",
+          "วางแผน (เชิงระบบ)",
+          "บูรณาการ",
+          "ผลิต",
+          "สังเคราะห์",
+          "นวัตกรรม",
+          "เสนอแนว",
+          "ประดิษฐ์"
+        ],
+        "english": [
+          "design",
+          "create",
+          "develop",
+          "plan",
+          "construct",
+          "produce",
+          "synthesize",
+          "formulate",
+          "generate",
+          "compose"
+        ],
+        "irpm": "P → M"
+      }
+    },
+    "Affective": {
+      "Receiving": {
+        "thai": [
+          "รับรู้",
+          "ตระหนักรู้",
+          "ใส่ใจ",
+          "เปิดรับ",
+          "ตั้งใจฟัง",
+          "สังเกต",
+          "สนใจ"
+        ],
+        "english": [
+          "attend",
+          "receive",
+          "listen",
+          "perceive",
+          "notice",
+          "be aware"
+        ],
+        "irpm": "I"
+      },
+      "Responding": {
+        "thai": [
+          "ตอบสนอง",
+          "ปฏิบัติตาม",
+          "เข้าร่วม",
+          "ยอมรับ (ปฏิบัติ)",
+          "แสดงความสนใจ",
+          "ปรากฏ (ในกิจกรรม)",
+          "ร่วมมือ"
+        ],
+        "english": [
+          "respond",
+          "comply",
+          "participate",
+          "discuss",
+          "practice",
+          "answer",
+          "perform (willingly)"
+        ],
+        "irpm": "I → R"
+      },
+      "Valuing": {
+        "thai": [
+          "เห็นคุณค่า",
+          "ให้ความสำคัญ",
+          "ปกป้อง",
+          "สนับสนุน",
+          "เชื่อมั่น",
+          "แสดงความมุ่งมั่น",
+          "ยึดมั่น (ในระดับเริ่มต้น)"
+        ],
+        "english": [
+          "value",
+          "demonstrate value",
+          "support",
+          "advocate",
+          "commit",
+          "show commitment",
+          "appreciate"
+        ],
+        "irpm": "R → P"
+      },
+      "Organization": {
+        "thai": [
+          "บูรณาการคุณค่า",
+          "จัดลำดับความสำคัญ",
+          "เชื่อมโยงคุณค่า",
+          "ประสานคุณค่า",
+          "วางตำแหน่ง",
+          "เลือกตามค่านิยม"
+        ],
+        "english": [
+          "integrate",
+          "organize values",
+          "prioritize",
+          "synthesize values",
+          "balance",
+          "weigh"
+        ],
+        "irpm": "P"
+      },
+      "Characterization": {
+        "thai": [
+          "ยึดมั่น (เป็นนิสัย)",
+          "แสดงเอกลักษณ์",
+          "ดำรงไว้",
+          "เป็นแบบอย่าง",
+          "แสดงพฤติกรรมสม่ำเสมอ",
+          "ปฏิบัติด้วยอุดมการณ์"
+        ],
+        "english": [
+          "internalize",
+          "act consistently",
+          "embody",
+          "characterize",
+          "exemplify",
+          "model"
+        ],
+        "irpm": "M"
+      }
+    },
+    "Psychomotor": {
+      "Perception": {
+        "thai": [
+          "รับรู้ (ขั้นตอน)",
+          "สังเกต (ทักษะ)",
+          "จดจำ (ท่า/ขั้นตอน)",
+          "เลือก (สัญญาณ)"
+        ],
+        "english": [
+          "perceive",
+          "observe",
+          "detect",
+          "differentiate (cues)"
+        ],
+        "irpm": "I"
+      },
+      "Set": {
+        "thai": [
+          "เตรียมพร้อม",
+          "ตั้งท่า",
+          "เตรียมอุปกรณ์",
+          "แสดงท่าทีพร้อม",
+          "เริ่มต้นได้ถูกต้อง"
+        ],
+        "english": [
+          "prepare",
+          "position",
+          "set up",
+          "show readiness",
+          "begin correctly"
+        ],
+        "irpm": "I"
+      },
+      "Guided Response": {
+        "thai": [
+          "ทำตามแบบ",
+          "เลียนแบบ",
+          "ฝึกตามคำแนะนำ",
+          "ทำซ้ำ (ภายใต้การกำกับ)",
+          "สาธิตตาม"
+        ],
+        "english": [
+          "imitate",
+          "follow instruction",
+          "replicate",
+          "rehearse (guided)"
+        ],
+        "irpm": "I → R"
+      },
+      "Mechanism": {
+        "thai": [
+          "ปฏิบัติได้",
+          "ทำได้คล่องตามขั้นตอน",
+          "แสดงทักษะ",
+          "ปฏิบัติได้ด้วยตนเอง"
+        ],
+        "english": [
+          "perform",
+          "execute (proficiently)",
+          "carry out",
+          "manipulate"
+        ],
+        "irpm": "R → P"
+      },
+      "Complex Overt Response": {
+        "thai": [
+          "ปฏิบัติได้อย่างชำนาญ",
+          "แสดงทักษะที่ซับซ้อน",
+          "ปฏิบัติประสานงาน",
+          "ทำได้คล่องและแม่นยำ"
+        ],
+        "english": [
+          "perform skillfully",
+          "execute complex",
+          "operate proficiently",
+          "demonstrate mastery"
+        ],
+        "irpm": "P → M"
+      },
+      "Adaptation": {
+        "thai": [
+          "ปรับใช้",
+          "ดัดแปลง",
+          "ปรับเปลี่ยน (ทักษะ)",
+          "ปรับให้เข้ากับสถานการณ์"
+        ],
+        "english": [
+          "adapt",
+          "modify",
+          "adjust",
+          "tailor"
+        ],
+        "irpm": "M"
+      },
+      "Origination": {
+        "thai": [
+          "สร้างสรรค์ (ทักษะใหม่)",
+          "ออกแบบขั้นตอนใหม่",
+          "ริเริ่ม",
+          "คิดค้นวิธีปฏิบัติ"
+        ],
+        "english": [
+          "create",
+          "originate",
+          "design",
+          "innovate (skill)"
+        ],
+        "irpm": "M"
+      }
+    }
+  },
+  "irpm": {
+    "I": {
+      "name": "Introduction (การแนะนำ)",
+      "thai_full": "การแนะนำให้รู้จัก ได้เห็น ได้รับรู้แนวคิดพื้นฐานเป็นครั้งแรก",
+      "description": "ผู้เรียนได้รับการแนะนำให้รู้จักแนวคิด หลักการ หรือทักษะใหม่เป็นครั้งแรก ระดับการเรียนรู้เน้นความเข้าใจพื้นฐาน การจดจำ การสังเกต ผู้เรียนยังไม่จำเป็นต้องนำไปใช้ได้เอง แต่ต้องสามารถระบุ อธิบาย หรือบอกความสำคัญได้",
+      "bloom_match": "Cognitive: Remember + Understand | Affective: Receiving + early Responding | Psychomotor: Perception + Set + early Guided Response",
+      "expected_year": "ชั้นปี 1 (ส่วนใหญ่) — ปี 2 (รายวิชาวิชาชีพแรก)"
+    },
+    "R": {
+      "name": "Reinforcement (การเสริมสร้าง)",
+      "thai_full": "การเสริมแรง ฝึกซ้ำ และเชื่อมโยงในบริบทที่หลากหลาย",
+      "description": "ผู้เรียนได้รับการฝึกซ้ำในบริบทใหม่ที่หลากหลาย ทำให้ความรู้/ทักษะเชื่อมโยงและฝังแน่นขึ้น เน้นการประยุกต์ใช้ในสถานการณ์ที่คุ้นเคย วิเคราะห์เปรียบเทียบ และเริ่มแสดงพฤติกรรมที่เห็นคุณค่า",
+      "bloom_match": "Cognitive: Understand + Apply + early Analyze | Affective: Responding + early Valuing | Psychomotor: Guided Response + early Mechanism",
+      "expected_year": "ชั้นปี 2-3 (ระยะกลางของหลักสูตร)"
+    },
+    "P": {
+      "name": "Practice (การฝึกฝนและประยุกต์)",
+      "thai_full": "การฝึกฝนและประยุกต์ใช้ในสถานการณ์จริงภายใต้การกำกับ",
+      "description": "ผู้เรียนได้ฝึกประยุกต์ใช้ความรู้และทักษะในสถานการณ์จริง (clinical, community) ภายใต้การกำกับของอาจารย์ผู้สอน เน้นการวิเคราะห์ ตัดสินใจ ประเมินสถานการณ์ และปฏิบัติได้คล่องและถูกต้อง พร้อมแสดงพฤติกรรมที่ยึดมั่นในคุณค่า",
+      "bloom_match": "Cognitive: Apply + Analyze + Evaluate + early Create | Affective: Valuing + Organization | Psychomotor: Mechanism + early Complex Overt Response",
+      "expected_year": "ชั้นปี 3-4 (วิชาปฏิบัติ/วิจัย)"
+    },
+    "M": {
+      "name": "Mastery (ความเชี่ยวชาญ)",
+      "thai_full": "ความเชี่ยวชาญและการแสดงออกอย่างอิสระ บูรณาการในระดับสูง",
+      "description": "ผู้เรียนสามารถปฏิบัติได้อย่างอิสระ บูรณาการความรู้และทักษะในสถานการณ์ที่ซับซ้อนและไม่คุ้นเคย พร้อมสร้างสรรค์แนวทางใหม่ ตัดสินใจอย่างมีวิจารณญาณ และแสดงพฤติกรรมที่สอดคล้องกับคุณค่าวิชาชีพอย่างสม่ำเสมอจนกลายเป็นเอกลักษณ์",
+      "bloom_match": "Cognitive: Evaluate + Create | Affective: Organization + Characterization | Psychomotor: Complex Overt Response + Adaptation + Origination",
+      "expected_year": "ชั้นปี 4 (รายวิชาบูรณาการ/ปฏิบัติขั้นสูง)"
+    }
+  },
+  "teachingMethods": {
+    "Lecture": "การบรรยายเชิงโต้ตอบ (Interactive Lecture)",
+    "ActiveLearning": "การเรียนรู้แบบเชิงรุก (Active Learning)",
+    "Inquiry": "การเรียนรู้แบบสืบสอบ (Inquiry-Based Learning)",
+    "PBL": "การเรียนรู้โดยใช้ปัญหาเป็นฐาน (Problem-Based Learning)",
+    "CBL": "การเรียนรู้โดยใช้กรณีตัวอย่าง (Case-Based Learning)",
+    "ProjectBL": "การเรียนรู้โดยใช้โครงงานเป็นฐาน (Project-Based Learning)",
+    "TBL": "การเรียนรู้แบบทีม (Team-Based Learning)",
+    "FlippedClass": "ห้องเรียนกลับด้าน (Flipped Classroom)",
+    "ConceptMapping": "การสร้างแผนผังความคิด (Concept Mapping)",
+    "GroupDiscussion": "การอภิปรายกลุ่ม (Group Discussion)",
+    "Demonstration": "การสาธิต (Demonstration) และการสาธิตย้อนกลับ (Return Demonstration)",
+    "Simulation": "การเรียนรู้จากสถานการณ์จำลอง (Simulation-Based Learning)",
+    "RolePlay": "บทบาทสมมติ (Role Play)",
+    "SkillsLab": "การฝึกปฏิบัติในห้องทดลอง (Skills Laboratory)",
+    "OSCE_format": "การฝึกในรูปแบบ OSCE (Mock OSCE Stations)",
+    "ClinicalPractice": "การฝึกปฏิบัติทางคลินิก (Clinical Practicum)",
+    "BedsideTeaching": "การสอนข้างเตียง (Bedside Teaching)",
+    "ClinicalConference": "การประชุมปรึกษาทางคลินิก (Clinical/Pre-Post Conference)",
+    "Coaching": "การโค้ชและให้คำปรึกษารายบุคคล (Coaching/Mentoring)",
+    "Reflection": "การสะท้อนคิด (Reflective Learning) และบันทึกการเรียนรู้ (Reflective Journal)",
+    "PreceptorshipPracticum": "การฝึกปฏิบัติแบบมีพี่เลี้ยง (Preceptorship)",
+    "CommunityBased": "การเรียนรู้ในชุมชน (Community-Based Learning)",
+    "EBPApplication": "การประยุกต์ใช้หลักฐานเชิงประจักษ์ (Evidence-Based Practice Application)",
+    "SelfDirect": "การเรียนรู้ด้วยตนเอง (Self-Directed Learning)",
+    "Cooperative": "การเรียนรู้แบบร่วมมือ (Cooperative Learning)",
+    "TechEnhanced": "การเรียนรู้โดยใช้เทคโนโลยีเสริม (Technology-Enhanced Learning)",
+    "DesignThinking": "การคิดเชิงออกแบบ (Design Thinking)",
+    "ExperientialL": "การเรียนรู้จากประสบการณ์ (Experiential Learning)"
+  },
+  "assessmentMethods": {
+    "MCQ": "ข้อสอบปรนัย (Multiple Choice Questions)",
+    "EssayExam": "ข้อสอบอัตนัย/ความเรียง (Essay Examination)",
+    "ShortAnswer": "ข้อสอบตอบสั้น (Short Answer)",
+    "OpenBookExam": "ข้อสอบแบบเปิดหนังสือ (Open-Book Examination)",
+    "CaseStudyReport": "รายงานกรณีศึกษา (Case Study Report)",
+    "CarePlan": "การจัดทำแผนการพยาบาล (Nursing Care Plan)",
+    "ConceptMapEval": "การประเมินแผนผังความคิด (Concept Map Assessment)",
+    "GroupReport": "รายงานกลุ่ม (Group Report) พร้อมการประเมินรายบุคคลและกลุ่ม",
+    "PresentationEval": "การนำเสนอผลงาน (Presentation Evaluation) ด้วย Rubric",
+    "OSCE": "การประเมินทักษะแบบ OSCE (Objective Structured Clinical Examination)",
+    "SkillChecklist": "Checklist ประเมินทักษะการพยาบาล",
+    "ReturnDemoEval": "การประเมินสาธิตย้อนกลับ (Return Demonstration Evaluation)",
+    "SimEval": "การประเมินผลในสถานการณ์จำลอง (Simulation Performance Evaluation)",
+    "ClinicalPerfEval": "การประเมินสมรรถนะการปฏิบัติการพยาบาลในคลินิก (Clinical Performance Evaluation)",
+    "DOPS": "Direct Observation of Procedural Skills (DOPS)",
+    "MiniCEX": "Mini Clinical Evaluation Exercise (Mini-CEX)",
+    "Portfolio": "แฟ้มสะสมผลงาน (Portfolio) พร้อม Reflective Notes",
+    "LogBook": "สมุดบันทึกการเรียนรู้/การปฏิบัติ (Logbook)",
+    "BehaviorObs": "การสังเกตพฤติกรรม (Structured Behavioral Observation) พร้อม Rubric",
+    "ReflectiveJournal": "บันทึกการสะท้อนคิด (Reflective Journal)",
+    "PeerEval": "การประเมินโดยเพื่อน (Peer Evaluation)",
+    "SelfAssess": "การประเมินตนเอง (Self-Assessment) พร้อมแผนพัฒนา",
+    "EthicsCase": "การวิเคราะห์กรณีศึกษาทางจริยธรรม (Ethical Case Analysis)",
+    "InnovProject": "โครงการพัฒนานวัตกรรม (Innovation Project Evaluation)",
+    "ResearchProposal": "โครงร่างการวิจัย (Research Proposal Evaluation)",
+    "EBPProject": "โครงการประยุกต์ใช้หลักฐานเชิงประจักษ์ (EBP Project)"
+  },
+  "framework": {
+    "PLO1": {
+      "Theory": [
+        {
+          "code": "T1-CLO1",
+          "statement": "อธิบายแนวคิด ทฤษฎี และหลักการพื้นฐานทางการพยาบาล การผดุงครรภ์ และศาสตร์ที่เกี่ยวข้องในการดูแลสุขภาพทุกช่วงวัย",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Understand",
+          "irpm": "I",
+          "ksa": "K",
+          "description": "เน้นความสามารถในการอธิบายและเข้าใจสาระสำคัญของแนวคิด ทฤษฎี หลักการพื้นฐานทางการพยาบาลและศาสตร์ร่วม เป็น CLO ระดับเริ่มต้นที่ใช้ในรายวิชาวิทยาศาสตร์พื้นฐาน วิชาแกน และวิชาทฤษฎีปีต้น (ปี 1-2)",
+          "teaching": [
+            "Lecture",
+            "ActiveLearning",
+            "ConceptMapping",
+            "FlippedClass"
+          ],
+          "assessment": [
+            "MCQ",
+            "ShortAnswer",
+            "ConceptMapEval"
+          ]
+        },
+        {
+          "code": "T1-CLO2",
+          "statement": "เปรียบเทียบและจำแนกแนวคิด ทฤษฎี และหลักฐานเชิงประจักษ์ที่เกี่ยวข้องกับการพยาบาลในแต่ละช่วงวัยและสถานการณ์สุขภาพ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "R",
+          "ksa": "K",
+          "description": "เน้นการคิดวิเคราะห์ระดับกลาง เปรียบเทียบและแยกแยะแนวคิด/ทฤษฎี/หลักฐานเชิงประจักษ์ระหว่างกลุ่มวัย/สถานการณ์ ใช้ในรายวิชาเฉพาะสาขาปี 2-3",
+          "teaching": [
+            "CBL",
+            "GroupDiscussion",
+            "Inquiry",
+            "FlippedClass"
+          ],
+          "assessment": [
+            "EssayExam",
+            "CaseStudyReport",
+            "ConceptMapEval",
+            "GroupReport"
+          ]
+        },
+        {
+          "code": "T1-CLO3",
+          "statement": "ประยุกต์ใช้ความรู้ทางการพยาบาล การผดุงครรภ์ และศาสตร์ที่เกี่ยวข้องในการประเมินภาวะสุขภาพและวางแผนการพยาบาลผู้รับบริการ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "เน้นการนำความรู้มาประยุกต์ใช้ในกระบวนการพยาบาล (Nursing Process) เช่น การประเมินภาวะสุขภาพ การวินิจฉัยทางการพยาบาล และวางแผน — ใช้ในรายวิชาเฉพาะสาขา ปี 2-3",
+          "teaching": [
+            "CBL",
+            "PBL",
+            "Simulation",
+            "ActiveLearning"
+          ],
+          "assessment": [
+            "CaseStudyReport",
+            "CarePlan",
+            "MCQ"
+          ]
+        },
+        {
+          "code": "T1-CLO4",
+          "statement": "วิเคราะห์ปัญหาสุขภาพและความต้องการของผู้รับบริการในทุกช่วงวัยโดยบูรณาการศาสตร์ทางการพยาบาลและศาสตร์ที่เกี่ยวข้อง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "P",
+          "ksa": "K",
+          "description": "เน้นการคิดวิเคราะห์เชิงบูรณาการในระดับสูง ผู้เรียนต้องเชื่อมโยงและบูรณาการความรู้จากหลายศาสตร์ เพื่อวิเคราะห์ปัญหาสุขภาพในบริบทที่ซับซ้อน ใช้ในรายวิชาเฉพาะสาขาปี 3-4",
+          "teaching": [
+            "PBL",
+            "CBL",
+            "TBL",
+            "ConceptMapping"
+          ],
+          "assessment": [
+            "CaseStudyReport",
+            "EssayExam",
+            "GroupReport",
+            "PresentationEval"
+          ]
+        },
+        {
+          "code": "T1-CLO5",
+          "statement": "ประเมินภาวะสุขภาพผู้รับบริการในทุกระยะของการเจ็บป่วยอย่างเป็นระบบโดยใช้ความรู้ทางการพยาบาลและหลักฐานเชิงประจักษ์",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Evaluate",
+          "irpm": "P → M",
+          "ksa": "K, S",
+          "description": "เน้นการประเมินสภาพผู้รับบริการอย่างเป็นระบบและเชิงประจักษ์ ผู้เรียนต้องตัดสินใจทางคลินิกบนข้อมูลและหลักฐาน ใช้ในรายวิชาเฉพาะสาขาปี 3-4 และวิชาบูรณาการ",
+          "teaching": [
+            "CBL",
+            "PBL",
+            "Simulation",
+            "EBPApplication"
+          ],
+          "assessment": [
+            "CaseStudyReport",
+            "CarePlan",
+            "EssayExam"
+          ]
+        },
+        {
+          "code": "T1-CLO6",
+          "statement": "ออกแบบแผนการพยาบาลแบบองค์รวมที่บูรณาการศาสตร์ที่เกี่ยวข้อง คำนึงถึงบริบทของผู้รับบริการและการใช้ยาอย่างสมเหตุผล",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "M",
+          "ksa": "K, S",
+          "description": "เน้นการสร้างสรรค์ผลงานทางวิชาชีพ — ผู้เรียนออกแบบแผนการพยาบาลที่ครอบคลุมและสอดคล้องกับบริบท แสดงการบูรณาการศาสตร์ในระดับสูง ใช้ในวิชาบูรณาการปี 4",
+          "teaching": [
+            "PBL",
+            "ProjectBL",
+            "CBL",
+            "DesignThinking"
+          ],
+          "assessment": [
+            "CarePlan",
+            "CaseStudyReport",
+            "InnovProject"
+          ]
+        }
+      ],
+      "Lab": [
+        {
+          "code": "L1-CLO1",
+          "statement": "สาธิตการประเมินภาวะสุขภาพและการตรวจร่างกายตามระบบในห้องทดลองอย่างถูกต้องตามขั้นตอน",
+          "bloom_domain": "Psychomotor",
+          "bloom_level": "Guided Response",
+          "irpm": "I → R",
+          "ksa": "K, S",
+          "description": "ฝึกทักษะการประเมินภาวะสุขภาพ/ตรวจร่างกายในห้องทดลอง ภายใต้การกำกับของอาจารย์ เน้นความถูกต้องของขั้นตอนตามมาตรฐาน",
+          "teaching": [
+            "Demonstration",
+            "SkillsLab",
+            "Simulation"
+          ],
+          "assessment": [
+            "SkillChecklist",
+            "ReturnDemoEval",
+            "OSCE"
+          ]
+        },
+        {
+          "code": "L1-CLO2",
+          "statement": "ตัดสินใจทางคลินิกในสถานการณ์จำลองโดยบูรณาการความรู้ทางการพยาบาลและศาสตร์ที่เกี่ยวข้อง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Evaluate",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "ใช้สถานการณ์จำลอง (Simulation) เพื่อฝึกการตัดสินใจทางคลินิก โดยบูรณาการความรู้และหลักฐานเชิงประจักษ์ ก่อนเข้าสู่สถานการณ์จริง",
+          "teaching": [
+            "Simulation",
+            "CBL",
+            "OSCE_format"
+          ],
+          "assessment": [
+            "SimEval",
+            "OSCE",
+            "CaseStudyReport"
+          ]
+        }
+      ],
+      "Practice": [
+        {
+          "code": "P1-CLO1",
+          "statement": "ประยุกต์ความรู้ทางการพยาบาลในการประเมินภาวะสุขภาพผู้รับบริการในสถานการณ์จริงอย่างเป็นระบบและครอบคลุม",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "ใช้ในรายวิชาปฏิบัติทุกสาขา เน้นการประยุกต์ความรู้ในการเก็บข้อมูล ประเมินสภาพ และวินิจฉัยปัญหาทางการพยาบาลในผู้รับบริการจริง",
+          "teaching": [
+            "ClinicalPractice",
+            "BedsideTeaching",
+            "ClinicalConference"
+          ],
+          "assessment": [
+            "ClinicalPerfEval",
+            "CarePlan",
+            "Mini-CEX",
+            "MiniCEX",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P1-CLO2",
+          "statement": "บูรณาการความรู้จากศาสตร์ที่เกี่ยวข้องในการวางแผนและให้การพยาบาลผู้รับบริการรายบุคคลในสถานการณ์จริง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "P → M",
+          "ksa": "K, S",
+          "description": "เน้นการบูรณาการศาสตร์ในการวางแผนและให้การพยาบาล ภายใต้การกำกับของอาจารย์/พี่เลี้ยง — ใช้ในรายวิชาปฏิบัติปี 3-4",
+          "teaching": [
+            "ClinicalPractice",
+            "Coaching",
+            "ClinicalConference",
+            "EBPApplication"
+          ],
+          "assessment": [
+            "CarePlan",
+            "ClinicalPerfEval",
+            "Portfolio",
+            "CaseStudyReport"
+          ]
+        },
+        {
+          "code": "P1-CLO3",
+          "statement": "ตัดสินใจทางคลินิกบนพื้นฐานหลักฐานเชิงประจักษ์อย่างมีวิจารณญาณในการดูแลผู้รับบริการที่มีภาวะซับซ้อน",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Evaluate",
+          "irpm": "M",
+          "ksa": "K, S",
+          "description": "เน้นการตัดสินใจในสถานการณ์ที่ซับซ้อน ภายใต้ความกดดัน — ใช้ในรายวิชาปฏิบัติชั้นสูง ปี 4 (เช่น การพยาบาลในภาวะวิกฤต)",
+          "teaching": [
+            "ClinicalPractice",
+            "Coaching",
+            "PreceptorshipPracticum",
+            "EBPApplication"
+          ],
+          "assessment": [
+            "ClinicalPerfEval",
+            "MiniCEX",
+            "Portfolio"
+          ]
+        }
+      ]
+    },
+    "PLO2": {
+      "Theory": [
+        {
+          "code": "T2-CLO1",
+          "statement": "อธิบายหลักการและขั้นตอนการปฏิบัติการพยาบาลและการผดุงครรภ์แบบองค์รวมด้วยหัวใจความเป็นมนุษย์",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Understand",
+          "irpm": "I → R",
+          "ksa": "K",
+          "description": "พื้นฐานความรู้ทฤษฎีก่อนการฝึกปฏิบัติ ใช้ในรายวิชาทฤษฎีก่อนการฝึกปฏิบัติทุกสาขา",
+          "teaching": [
+            "Lecture",
+            "ActiveLearning",
+            "FlippedClass"
+          ],
+          "assessment": [
+            "MCQ",
+            "ShortAnswer"
+          ]
+        },
+        {
+          "code": "T2-CLO2",
+          "statement": "วิเคราะห์หลักฐานเชิงประจักษ์ที่นำมาใช้ในการปฏิบัติการพยาบาลและการผดุงครรภ์ในแต่ละสาขา",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "R → P",
+          "ksa": "K",
+          "description": "เตรียมพื้นฐานทฤษฎีของการปฏิบัติบนหลักฐานเชิงประจักษ์ (EBP) ใช้ในวิชาทฤษฎี/วิชาวิจัย",
+          "teaching": [
+            "EBPApplication",
+            "GroupDiscussion",
+            "CBL"
+          ],
+          "assessment": [
+            "EssayExam",
+            "GroupReport",
+            "EBPProject"
+          ]
+        }
+      ],
+      "Lab": [
+        {
+          "code": "L2-CLO1",
+          "statement": "สาธิตทักษะการพยาบาลและการผดุงครรภ์พื้นฐานตามขั้นตอนในห้องทดลองได้อย่างถูกต้องและปลอดภัย",
+          "bloom_domain": "Psychomotor",
+          "bloom_level": "Guided Response",
+          "irpm": "I → R",
+          "ksa": "S",
+          "description": "ฝึกทักษะภายใต้การกำกับ เน้นการทำตามขั้นตอนมาตรฐาน — ใช้ในวิชาการพยาบาลขั้นพื้นฐาน",
+          "teaching": [
+            "Demonstration",
+            "SkillsLab"
+          ],
+          "assessment": [
+            "SkillChecklist",
+            "ReturnDemoEval"
+          ]
+        },
+        {
+          "code": "L2-CLO2",
+          "statement": "ปฏิบัติทักษะการพยาบาลและการผดุงครรภ์ในสถานการณ์จำลองได้อย่างถูกต้อง ปลอดภัย และคำนึงถึงการใช้ยาอย่างสมเหตุผล",
+          "bloom_domain": "Psychomotor",
+          "bloom_level": "Mechanism",
+          "irpm": "R → P",
+          "ksa": "S, A",
+          "description": "ปฏิบัติได้ด้วยตนเองในสถานการณ์จำลองที่หลากหลาย เน้นความปลอดภัยและการใช้ยาอย่างสมเหตุผล",
+          "teaching": [
+            "Simulation",
+            "OSCE_format",
+            "RolePlay"
+          ],
+          "assessment": [
+            "OSCE",
+            "SimEval",
+            "SkillChecklist"
+          ]
+        },
+        {
+          "code": "L2-CLO3",
+          "statement": "บูรณาการทักษะการพยาบาลและการผดุงครรภ์ในสถานการณ์จำลองที่ซับซ้อนและตอบสนองต่อความหลากหลายทางวัฒนธรรม",
+          "bloom_domain": "Psychomotor",
+          "bloom_level": "Complex Overt Response",
+          "irpm": "P",
+          "ksa": "S, A",
+          "description": "ใช้สถานการณ์จำลองที่ซับซ้อนเพื่อบูรณาการทักษะ — เป็นสะพานสู่การปฏิบัติจริง",
+          "teaching": [
+            "Simulation",
+            "TBL",
+            "RolePlay"
+          ],
+          "assessment": [
+            "OSCE",
+            "SimEval"
+          ]
+        }
+      ],
+      "Practice": [
+        {
+          "code": "P2-CLO1",
+          "statement": "ปฏิบัติการพยาบาลและการผดุงครรภ์แบบองค์รวมด้วยหัวใจความเป็นมนุษย์โดยใช้กระบวนการพยาบาลในสถานการณ์จริง",
+          "bloom_domain": "Psychomotor",
+          "bloom_level": "Mechanism",
+          "irpm": "P",
+          "ksa": "S, A",
+          "description": "CLO หลักของรายวิชาปฏิบัติทุกสาขา — เน้นกระบวนการพยาบาลและหัวใจความเป็นมนุษย์",
+          "teaching": [
+            "ClinicalPractice",
+            "BedsideTeaching",
+            "PreceptorshipPracticum"
+          ],
+          "assessment": [
+            "ClinicalPerfEval",
+            "DOPS",
+            "CarePlan",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P2-CLO2",
+          "statement": "ปฏิบัติการพยาบาลและการผดุงครรภ์บนหลักฐานเชิงประจักษ์โดยคำนึงถึงความปลอดภัยและการใช้ยาอย่างสมเหตุผล",
+          "bloom_domain": "Psychomotor",
+          "bloom_level": "Complex Overt Response",
+          "irpm": "P → M",
+          "ksa": "S, A",
+          "description": "เน้นการปฏิบัติบน EBP และ Patient Safety — มาตรฐาน WHO/JCI/HA",
+          "teaching": [
+            "ClinicalPractice",
+            "EBPApplication",
+            "Coaching"
+          ],
+          "assessment": [
+            "ClinicalPerfEval",
+            "CarePlan",
+            "EBPProject",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P2-CLO3",
+          "statement": "ปฏิบัติการพยาบาลและการผดุงครรภ์ที่ตอบสนองต่อความหลากหลายทางวัฒนธรรม ภายใต้กฎหมายและจรรยาบรรณวิชาชีพ",
+          "bloom_domain": "Affective",
+          "bloom_level": "Organization",
+          "irpm": "P → M",
+          "ksa": "A, S",
+          "description": "บูรณาการคุณค่าทางวิชาชีพ จริยธรรม และความเป็น cultural competence ในการปฏิบัติ",
+          "teaching": [
+            "ClinicalPractice",
+            "Reflection",
+            "CommunityBased"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "ReflectiveJournal",
+            "ClinicalPerfEval",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P2-CLO4",
+          "statement": "ปรับใช้ทักษะการพยาบาลและการผดุงครรภ์ในสถานการณ์ที่ซับซ้อนและไม่คุ้นเคยอย่างชำนาญและสร้างสรรค์",
+          "bloom_domain": "Psychomotor",
+          "bloom_level": "Adaptation",
+          "irpm": "M",
+          "ksa": "S, A",
+          "description": "ระดับความเชี่ยวชาญสูงสุด — ผู้เรียนสามารถปรับทักษะให้เข้ากับสถานการณ์ที่ไม่คุ้นเคย",
+          "teaching": [
+            "ClinicalPractice",
+            "PreceptorshipPracticum",
+            "Reflection"
+          ],
+          "assessment": [
+            "ClinicalPerfEval",
+            "MiniCEX",
+            "Portfolio"
+          ]
+        }
+      ]
+    },
+    "PLO3": {
+      "Theory": [
+        {
+          "code": "T3-CLO1",
+          "statement": "อธิบายแนวคิด ทฤษฎีจริยศาสตร์ หลักจริยธรรม จรรยาบรรณวิชาชีพ สิทธิผู้ป่วย และสิทธิของพยาบาล",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Understand",
+          "irpm": "I",
+          "ksa": "K",
+          "description": "พื้นฐานความรู้ที่ใช้ในวิชากฎหมายและจริยศาสตร์ทางการพยาบาล — ระดับ I ในชั้นปี 2",
+          "teaching": [
+            "Lecture",
+            "ActiveLearning",
+            "FlippedClass"
+          ],
+          "assessment": [
+            "MCQ",
+            "ShortAnswer"
+          ]
+        },
+        {
+          "code": "T3-CLO2",
+          "statement": "วิเคราะห์ประเด็นทางจริยธรรมและกฎหมายที่เกี่ยวข้องกับการประกอบวิชาชีพการพยาบาลและการผดุงครรภ์",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "R",
+          "ksa": "K",
+          "description": "วิเคราะห์ ethical dilemmas ในกรณีศึกษา ใช้ในวิชากฎหมาย/จริยศาสตร์ และวิชาเฉพาะสาขา",
+          "teaching": [
+            "CBL",
+            "GroupDiscussion",
+            "EthicsCase"
+          ],
+          "assessment": [
+            "CaseStudyReport",
+            "EthicsCase",
+            "GroupReport"
+          ]
+        },
+        {
+          "code": "T3-CLO3",
+          "statement": "ตัดสินใจเชิงจริยธรรมในสถานการณ์ที่ซับซ้อนโดยใช้แนวคิดทฤษฎีจริยศาสตร์ จรรยาบรรณวิชาชีพ และกฎหมายที่เกี่ยวข้อง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Evaluate",
+          "irpm": "P",
+          "ksa": "K, A",
+          "description": "ตัดสินใจในสถานการณ์ ethical dilemma ระดับซับซ้อน ใช้ในวิชาบูรณาการชั้นปี 3-4",
+          "teaching": [
+            "CBL",
+            "GroupDiscussion",
+            "RolePlay"
+          ],
+          "assessment": [
+            "EthicsCase",
+            "EssayExam",
+            "CaseStudyReport"
+          ]
+        }
+      ],
+      "Lab": [
+        {
+          "code": "L3-CLO1",
+          "statement": "แสดงเจตคติที่ดีต่อวิชาชีพและเคารพในศักดิ์ศรีของผู้รับบริการในกิจกรรมการเรียนรู้และสถานการณ์จำลอง",
+          "bloom_domain": "Affective",
+          "bloom_level": "Responding",
+          "irpm": "I → R",
+          "ksa": "A",
+          "description": "ฝึกแสดงเจตคติและพฤติกรรมที่เหมาะสมในห้องทดลอง/สถานการณ์จำลอง",
+          "teaching": [
+            "Simulation",
+            "RolePlay",
+            "Reflection"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "ReflectiveJournal",
+            "PeerEval"
+          ]
+        },
+        {
+          "code": "L3-CLO2",
+          "statement": "แสดงพฤติกรรมที่สะท้อนคุณธรรม จริยธรรม และจรรยาบรรณวิชาชีพในการอภิปรายและปฏิบัติงานกลุ่ม",
+          "bloom_domain": "Affective",
+          "bloom_level": "Valuing",
+          "irpm": "R → P",
+          "ksa": "A",
+          "description": "เห็นคุณค่าและแสดงความมุ่งมั่นต่อจรรยาบรรณ — สะท้อนผ่านพฤติกรรมในกลุ่ม",
+          "teaching": [
+            "TBL",
+            "GroupDiscussion",
+            "Reflection"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "ReflectiveJournal",
+            "PeerEval",
+            "SelfAssess"
+          ]
+        }
+      ],
+      "Practice": [
+        {
+          "code": "P3-CLO1",
+          "statement": "ปฏิบัติตามจรรยาบรรณวิชาชีพและเคารพสิทธิผู้รับบริการในการให้การพยาบาลในสถานการณ์จริง",
+          "bloom_domain": "Affective",
+          "bloom_level": "Valuing",
+          "irpm": "P",
+          "ksa": "A",
+          "description": "พฤติกรรมที่สะท้อนการยึดมั่นในจรรยาบรรณ ในการดูแลผู้รับบริการจริง",
+          "teaching": [
+            "ClinicalPractice",
+            "Reflection",
+            "Coaching"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "ClinicalPerfEval",
+            "ReflectiveJournal",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P3-CLO2",
+          "statement": "ตัดสินใจเชิงจริยธรรมในการแก้ปัญหาทางการพยาบาลในสถานการณ์จริงโดยคำนึงถึงสิทธิผู้รับบริการและจรรยาบรรณวิชาชีพ",
+          "bloom_domain": "Affective",
+          "bloom_level": "Organization",
+          "irpm": "P → M",
+          "ksa": "A, K",
+          "description": "บูรณาการค่านิยมและความรู้เพื่อตัดสินใจในสถานการณ์ ethical dilemma จริง",
+          "teaching": [
+            "ClinicalPractice",
+            "ClinicalConference",
+            "Reflection"
+          ],
+          "assessment": [
+            "EthicsCase",
+            "ReflectiveJournal",
+            "ClinicalPerfEval",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P3-CLO3",
+          "statement": "แสดงออกถึงพฤติกรรมด้านคุณธรรม จริยธรรม จรรยาบรรณวิชาชีพ และเจตคติที่ดีต่อวิชาชีพอย่างสม่ำเสมอจนเป็นเอกลักษณ์",
+          "bloom_domain": "Affective",
+          "bloom_level": "Characterization",
+          "irpm": "M",
+          "ksa": "A",
+          "description": "ระดับสูงสุดของ Affective domain — แสดงพฤติกรรมที่เป็นเอกลักษณ์ของวิชาชีพ",
+          "teaching": [
+            "ClinicalPractice",
+            "PreceptorshipPracticum",
+            "Reflection"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "ReflectiveJournal",
+            "Portfolio",
+            "PeerEval"
+          ]
+        }
+      ]
+    },
+    "PLO4": {
+      "Theory": [
+        {
+          "code": "T4-CLO1",
+          "statement": "อธิบายแนวคิดและหลักการของการคิดขั้นสูง การคิดอย่างมีวิจารณญาณ การคิดเชิงระบบ และการคิดสร้างสรรค์",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Understand",
+          "irpm": "I → R",
+          "ksa": "K",
+          "description": "พื้นฐานทฤษฎีของ HOTS (Higher-Order Thinking Skills) ใช้ในวิชาจิตวิทยา/วิชาแกน",
+          "teaching": [
+            "Lecture",
+            "ActiveLearning",
+            "ConceptMapping"
+          ],
+          "assessment": [
+            "MCQ",
+            "ShortAnswer",
+            "ConceptMapEval"
+          ]
+        },
+        {
+          "code": "T4-CLO2",
+          "statement": "ใช้กระบวนการคิดอย่างเป็นระบบและการคิดอย่างมีวิจารณญาณในการวิเคราะห์ปัญหาและสถานการณ์ทางการพยาบาล",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "นำการคิดเชิงระบบมาใช้ในการแยกแยะ/วิเคราะห์ปัญหา ในรายวิชาเฉพาะสาขา",
+          "teaching": [
+            "PBL",
+            "CBL",
+            "Inquiry",
+            "ConceptMapping"
+          ],
+          "assessment": [
+            "CaseStudyReport",
+            "EssayExam",
+            "ConceptMapEval"
+          ]
+        },
+        {
+          "code": "T4-CLO3",
+          "statement": "ประเมินทางเลือกและตัดสินใจในการแก้ปัญหาทางการพยาบาลโดยใช้หลักฐานเชิงประจักษ์และเหตุผล",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Evaluate",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "ตัดสินใจอย่างมีวิจารณญาณบนข้อมูลเชิงประจักษ์ — ใช้ในวิชาบูรณาการ",
+          "teaching": [
+            "PBL",
+            "CBL",
+            "EBPApplication"
+          ],
+          "assessment": [
+            "CaseStudyReport",
+            "CarePlan",
+            "EssayExam"
+          ]
+        },
+        {
+          "code": "T4-CLO4",
+          "statement": "สร้างแนวทางใหม่ในการแก้ปัญหาทางการพยาบาลโดยใช้การคิดสร้างสรรค์และการคิดเชิงออกแบบ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "P → M",
+          "ksa": "K, S",
+          "description": "การคิดเชิงออกแบบ (Design Thinking) — ใช้ในรายวิชานวัตกรรม/การศึกษาอิสระ",
+          "teaching": [
+            "DesignThinking",
+            "ProjectBL",
+            "PBL"
+          ],
+          "assessment": [
+            "InnovProject",
+            "PresentationEval",
+            "Portfolio"
+          ]
+        }
+      ],
+      "Lab": [
+        {
+          "code": "L4-CLO1",
+          "statement": "ใช้ทักษะการคิดอย่างเป็นระบบและสร้างสรรค์ในการแก้ปัญหาในสถานการณ์จำลอง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "ฝึกการคิดในสถานการณ์จำลองก่อนเข้าสู่สถานการณ์จริง",
+          "teaching": [
+            "Simulation",
+            "PBL",
+            "DesignThinking"
+          ],
+          "assessment": [
+            "SimEval",
+            "CaseStudyReport"
+          ]
+        },
+        {
+          "code": "L4-CLO2",
+          "statement": "ออกแบบแนวทางการแก้ปัญหาทางการพยาบาลในสถานการณ์จำลองโดยใช้การคิดเชิงออกแบบ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "Design Thinking ในห้องทดลอง — ใช้ในวิชานวัตกรรม/วิจัย",
+          "teaching": [
+            "DesignThinking",
+            "Simulation",
+            "ProjectBL"
+          ],
+          "assessment": [
+            "InnovProject",
+            "PresentationEval"
+          ]
+        }
+      ],
+      "Practice": [
+        {
+          "code": "P4-CLO1",
+          "statement": "ใช้การคิดขั้นสูงและการคิดอย่างมีวิจารณญาณในการตัดสินใจทางคลินิกในสถานการณ์จริง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Evaluate",
+          "irpm": "P → M",
+          "ksa": "K, S",
+          "description": "ตัดสินใจทางคลินิกบนข้อมูลและบริบท — ใช้ในรายวิชาปฏิบัติทุกสาขา",
+          "teaching": [
+            "ClinicalPractice",
+            "ClinicalConference",
+            "Reflection"
+          ],
+          "assessment": [
+            "ClinicalPerfEval",
+            "CarePlan",
+            "ReflectiveJournal",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P4-CLO2",
+          "statement": "แก้ปัญหาทางการพยาบาลด้วยการคิดสร้างสรรค์และพัฒนานวัตกรรมในสถานการณ์จริง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "M",
+          "ksa": "K, S",
+          "description": "ระดับสูงสุด — สร้างนวัตกรรมจากบริบทจริง — ใช้ในวิชาการศึกษาอิสระ/ปฏิบัติชุมชน",
+          "teaching": [
+            "ProjectBL",
+            "DesignThinking",
+            "CommunityBased"
+          ],
+          "assessment": [
+            "InnovProject",
+            "Portfolio",
+            "PresentationEval"
+          ]
+        }
+      ]
+    },
+    "PLO5": {
+      "Theory": [
+        {
+          "code": "T5-CLO1",
+          "statement": "อธิบายแนวคิด หลักการ กระบวนการ และระเบียบวิธีวิจัยทางการพยาบาลและการพัฒนานวัตกรรมสุขภาพ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Understand",
+          "irpm": "I",
+          "ksa": "K",
+          "description": "พื้นฐานความรู้ของวิชาวิจัยและนวัตกรรม — ระดับ I",
+          "teaching": [
+            "Lecture",
+            "ActiveLearning",
+            "FlippedClass"
+          ],
+          "assessment": [
+            "MCQ",
+            "ShortAnswer"
+          ]
+        },
+        {
+          "code": "T5-CLO2",
+          "statement": "วิเคราะห์งานวิจัยและหลักฐานเชิงประจักษ์ที่เกี่ยวข้องกับการปฏิบัติการพยาบาลและการผดุงครรภ์",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "ประเมินคุณภาพและสังเคราะห์ผลการวิจัยตาม EBP framework",
+          "teaching": [
+            "Inquiry",
+            "EBPApplication",
+            "CBL"
+          ],
+          "assessment": [
+            "EssayExam",
+            "GroupReport",
+            "EBPProject"
+          ]
+        },
+        {
+          "code": "T5-CLO3",
+          "statement": "ออกแบบโครงร่างการวิจัยหรือแผนการพัฒนานวัตกรรมการดูแลสุขภาพที่ตอบโจทย์ปัญหาจริง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "ใช้ในวิชาวิจัย/การศึกษาอิสระ — ผู้เรียนเขียน proposal/blueprint",
+          "teaching": [
+            "ProjectBL",
+            "DesignThinking",
+            "Coaching"
+          ],
+          "assessment": [
+            "ResearchProposal",
+            "InnovProject",
+            "PresentationEval"
+          ]
+        },
+        {
+          "code": "T5-CLO4",
+          "statement": "แสดงพฤติกรรมที่สะท้อนจริยธรรมและจรรยาบรรณของนักวิจัยในการดำเนินการวิจัยและพัฒนานวัตกรรม",
+          "bloom_domain": "Affective",
+          "bloom_level": "Valuing",
+          "irpm": "R → P",
+          "ksa": "A",
+          "description": "จริยธรรมการวิจัย (research ethics) และการเคารพสิทธิผู้เข้าร่วมการวิจัย",
+          "teaching": [
+            "EthicsCase",
+            "GroupDiscussion",
+            "Reflection"
+          ],
+          "assessment": [
+            "EthicsCase",
+            "ReflectiveJournal",
+            "BehaviorObs"
+          ]
+        }
+      ],
+      "Lab": [
+        {
+          "code": "L5-CLO1",
+          "statement": "ฝึกปฏิบัติการสืบค้น วิเคราะห์ และสังเคราะห์งานวิจัยจากฐานข้อมูลทางการพยาบาลและสุขภาพ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "R",
+          "ksa": "K, S",
+          "description": "ทักษะการสืบค้นและประเมินงานวิจัยตามมาตรฐาน PRISMA / EBP",
+          "teaching": [
+            "TechEnhanced",
+            "EBPApplication",
+            "Inquiry"
+          ],
+          "assessment": [
+            "EBPProject",
+            "GroupReport"
+          ]
+        },
+        {
+          "code": "L5-CLO2",
+          "statement": "ออกแบบและพัฒนาต้นแบบนวัตกรรมการดูแลสุขภาพในสถานการณ์จำลอง/ห้องทดลอง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "Prototyping innovation — ใช้ในวิชานวัตกรรม/การศึกษาอิสระ",
+          "teaching": [
+            "DesignThinking",
+            "ProjectBL"
+          ],
+          "assessment": [
+            "InnovProject",
+            "PresentationEval"
+          ]
+        }
+      ],
+      "Practice": [
+        {
+          "code": "P5-CLO1",
+          "statement": "ประยุกต์ใช้ผลการวิจัยและหลักฐานเชิงประจักษ์ในการปฏิบัติการพยาบาลและการผดุงครรภ์ในสถานการณ์จริง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "การปฏิบัติบน EBP — ใช้ในรายวิชาปฏิบัติทุกสาขา ปี 4",
+          "teaching": [
+            "ClinicalPractice",
+            "EBPApplication",
+            "ClinicalConference"
+          ],
+          "assessment": [
+            "EBPProject",
+            "CarePlan",
+            "ClinicalPerfEval",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P5-CLO2",
+          "statement": "พัฒนานวัตกรรมการดูแลสุขภาพที่ตอบสนองต่อปัญหาในชุมชนหรือคลินิกอย่างเหมาะสมกับบริบท",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "P → M",
+          "ksa": "K, S, A",
+          "description": "ใช้ในวิชาปฏิบัติการบริหารจัดการสุขภาวะชุมชนและการศึกษาอิสระ",
+          "teaching": [
+            "CommunityBased",
+            "ProjectBL",
+            "DesignThinking"
+          ],
+          "assessment": [
+            "InnovProject",
+            "Portfolio",
+            "PresentationEval"
+          ]
+        }
+      ]
+    },
+    "PLO6": {
+      "Theory": [
+        {
+          "code": "T6-CLO1",
+          "statement": "อธิบายแนวคิด ทฤษฎีภาวะผู้นำ และหลักการบริหารจัดการสุขภาวะชุมชน",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Understand",
+          "irpm": "I",
+          "ksa": "K",
+          "description": "พื้นฐานทฤษฎีภาวะผู้นำและบริหาร — ใช้ในวิชาบริหาร/ชุมชน",
+          "teaching": [
+            "Lecture",
+            "ActiveLearning",
+            "GroupDiscussion"
+          ],
+          "assessment": [
+            "MCQ",
+            "ShortAnswer"
+          ]
+        },
+        {
+          "code": "T6-CLO2",
+          "statement": "วิเคราะห์บทบาทของพยาบาลในการเป็นผู้นำและบริหารจัดการสุขภาวะชุมชนในบริบทไทย",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "R",
+          "ksa": "K",
+          "description": "วิเคราะห์ context ของระบบสาธารณสุขไทย",
+          "teaching": [
+            "CBL",
+            "GroupDiscussion",
+            "FlippedClass"
+          ],
+          "assessment": [
+            "CaseStudyReport",
+            "GroupReport",
+            "EssayExam"
+          ]
+        },
+        {
+          "code": "T6-CLO3",
+          "statement": "ออกแบบแผนการบริหารจัดการสุขภาวะชุมชนโดยใช้กระบวนการมีส่วนร่วมและการบูรณาการศาสตร์ที่เกี่ยวข้อง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "ออกแบบแผนพัฒนาสุขภาพชุมชน — ใช้ในวิชาการพยาบาลชุมชน",
+          "teaching": [
+            "ProjectBL",
+            "PBL",
+            "CommunityBased"
+          ],
+          "assessment": [
+            "InnovProject",
+            "GroupReport",
+            "PresentationEval"
+          ]
+        }
+      ],
+      "Lab": [
+        {
+          "code": "L6-CLO1",
+          "statement": "แสดงบทบาทผู้นำและผู้ตามในกิจกรรมกลุ่มและสถานการณ์จำลองอย่างเหมาะสม",
+          "bloom_domain": "Affective",
+          "bloom_level": "Responding",
+          "irpm": "I → R",
+          "ksa": "A, S",
+          "description": "ฝึกบทบาทผู้นำใน TBL/Simulation",
+          "teaching": [
+            "TBL",
+            "Simulation",
+            "RolePlay"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "PeerEval",
+            "ReflectiveJournal"
+          ]
+        }
+      ],
+      "Practice": [
+        {
+          "code": "P6-CLO1",
+          "statement": "แสดงบทบาทผู้นำในการประสานความร่วมมือกับทีมสุขภาพและชุมชนอย่างมีประสิทธิผล",
+          "bloom_domain": "Affective",
+          "bloom_level": "Valuing",
+          "irpm": "P",
+          "ksa": "A, S",
+          "description": "ใช้ในวิชาปฏิบัติชุมชน/บริหาร",
+          "teaching": [
+            "ClinicalPractice",
+            "CommunityBased",
+            "Coaching"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "ClinicalPerfEval",
+            "PeerEval",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P6-CLO2",
+          "statement": "บริหารจัดการสุขภาวะชุมชนโดยบูรณาการความรู้ทางการพยาบาลและการบริหาร และใช้กระบวนการมีส่วนร่วม",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "P → M",
+          "ksa": "K, S, A",
+          "description": "บูรณาการความรู้ในการบริหารชุมชนจริง — ใช้ในปฏิบัติการพยาบาลและการบริหารจัดการสุขภาวะชุมชน",
+          "teaching": [
+            "CommunityBased",
+            "ProjectBL",
+            "ClinicalConference"
+          ],
+          "assessment": [
+            "InnovProject",
+            "GroupReport",
+            "ClinicalPerfEval",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P6-CLO3",
+          "statement": "แสดงภาวะผู้นำในการแก้ปัญหาสุขภาพชุมชนอย่างสร้างสรรค์และยั่งยืนตามสิทธิของตนเองโดยไม่ละเมิดสิทธิผู้อื่น",
+          "bloom_domain": "Affective",
+          "bloom_level": "Characterization",
+          "irpm": "M",
+          "ksa": "A, S",
+          "description": "ระดับ M — แสดงภาวะผู้นำเป็นเอกลักษณ์",
+          "teaching": [
+            "CommunityBased",
+            "Reflection",
+            "PreceptorshipPracticum"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "ReflectiveJournal",
+            "Portfolio",
+            "PeerEval"
+          ]
+        }
+      ]
+    },
+    "PLO7": {
+      "Theory": [
+        {
+          "code": "T7-CLO1",
+          "statement": "อธิบายหลักการสื่อสารและการใช้ภาษาไทย/ภาษาอังกฤษในเชิงวิชาการและวิชาชีพการพยาบาล",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Understand",
+          "irpm": "I",
+          "ksa": "K",
+          "description": "พื้นฐานหลักการสื่อสารและการใช้ภาษา",
+          "teaching": [
+            "Lecture",
+            "ActiveLearning"
+          ],
+          "assessment": [
+            "MCQ",
+            "ShortAnswer"
+          ]
+        },
+        {
+          "code": "T7-CLO2",
+          "statement": "ใช้ภาษาไทยและ/หรือภาษาอังกฤษในการฟัง พูด อ่าน เขียน สรุปและถ่ายทอดสาระสำคัญทางวิชาการและวิชาชีพ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "ทักษะภาษาเพื่อการสื่อสารวิชาชีพ",
+          "teaching": [
+            "ActiveLearning",
+            "Cooperative",
+            "TechEnhanced"
+          ],
+          "assessment": [
+            "EssayExam",
+            "PresentationEval",
+            "GroupReport"
+          ]
+        },
+        {
+          "code": "T7-CLO3",
+          "statement": "เขียนรายงาน บันทึกทางการพยาบาล หรือเอกสารทางวิชาชีพอย่างเป็นระบบและถูกต้องตามหลักวิชาชีพ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "การเขียนเชิงวิชาชีพ — รายงาน บันทึก documentation",
+          "teaching": [
+            "ActiveLearning",
+            "Coaching"
+          ],
+          "assessment": [
+            "EssayExam",
+            "Portfolio",
+            "GroupReport"
+          ]
+        },
+        {
+          "code": "T7-CLO4",
+          "statement": "นำเสนอข้อมูล ผลงานทางวิชาการ หรือสาระด้านสุขภาพด้วยภาษาที่กระชับ ชัดเจน และถูกต้อง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "ทักษะการนำเสนอ",
+          "teaching": [
+            "ActiveLearning",
+            "TechEnhanced",
+            "Cooperative"
+          ],
+          "assessment": [
+            "PresentationEval",
+            "PeerEval"
+          ]
+        },
+        {
+          "code": "T7-CLO5",
+          "statement": "สื่อสารและถ่ายทอดความรู้ด้านสุขภาพแก่บุคคล กลุ่ม และชุมชนด้วยภาษาที่เข้าใจง่ายและเหมาะสมกับวัฒนธรรม",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P → M",
+          "ksa": "K, S, A",
+          "description": "การสื่อสารกับ lay audience — health literacy",
+          "teaching": [
+            "CommunityBased",
+            "ProjectBL",
+            "ActiveLearning"
+          ],
+          "assessment": [
+            "PresentationEval",
+            "BehaviorObs",
+            "PeerEval"
+          ]
+        }
+      ],
+      "Lab": [
+        {
+          "code": "L7-CLO1",
+          "statement": "ใช้ภาษาอังกฤษพูดและสนทนาในสถานการณ์ทางการพยาบาลและในชีวิตประจำวันได้อย่างเหมาะสม",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "ทักษะภาษาอังกฤษเชิงสนทนา",
+          "teaching": [
+            "Simulation",
+            "RolePlay",
+            "Cooperative"
+          ],
+          "assessment": [
+            "PresentationEval",
+            "BehaviorObs"
+          ]
+        },
+        {
+          "code": "L7-CLO2",
+          "statement": "จับใจความ ฟัง อ่าน และเขียนภาษาอังกฤษเชิงวิชาชีพในงานพยาบาลได้",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "การอ่านและเขียนเชิงวิชาชีพ",
+          "teaching": [
+            "TechEnhanced",
+            "Cooperative",
+            "FlippedClass"
+          ],
+          "assessment": [
+            "EssayExam",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "L7-CLO3",
+          "statement": "นำเสนอข้อมูล หัวข้อทางสุขภาพ หรือการพยาบาลด้วยภาษาไทยและ/หรืออังกฤษอย่างมั่นใจและถูกต้อง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "นำเสนอผลงานวิชาการ",
+          "teaching": [
+            "ActiveLearning",
+            "Cooperative",
+            "TechEnhanced"
+          ],
+          "assessment": [
+            "PresentationEval",
+            "PeerEval"
+          ]
+        }
+      ],
+      "Practice": [
+        {
+          "code": "P7-CLO1",
+          "statement": "ซักประวัติและสื่อสารกับผู้รับบริการและครอบครัวอย่างมีประสิทธิภาพและคำนึงถึงความหลากหลายทางวัฒนธรรม",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P",
+          "ksa": "K, S, A",
+          "description": "ทักษะการสื่อสารทางคลินิก",
+          "teaching": [
+            "ClinicalPractice",
+            "BedsideTeaching",
+            "Coaching"
+          ],
+          "assessment": [
+            "DOPS",
+            "ClinicalPerfEval",
+            "BehaviorObs"
+          ]
+        },
+        {
+          "code": "P7-CLO2",
+          "statement": "ให้ข้อมูลสุขภาพและคำแนะนำการดูแลตนเองแก่ผู้รับบริการด้วยภาษาที่เข้าใจง่ายและเหมาะสม",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "Health education — health literacy",
+          "teaching": [
+            "ClinicalPractice",
+            "CommunityBased"
+          ],
+          "assessment": [
+            "DOPS",
+            "BehaviorObs",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P7-CLO3",
+          "statement": "นำเสนอเคสและสื่อสารกับทีมสุขภาพด้วยภาษาที่เป็นทางการและถูกต้องตามวิชาชีพ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P → M",
+          "ksa": "K, S",
+          "description": "Case presentation / handover communication",
+          "teaching": [
+            "ClinicalConference",
+            "BedsideTeaching"
+          ],
+          "assessment": [
+            "PresentationEval",
+            "ClinicalPerfEval",
+            "PeerEval"
+          ]
+        },
+        {
+          "code": "P7-CLO4",
+          "statement": "เขียนบันทึกทางการพยาบาล (Nursing notes / Progress notes) และรายงานการปฏิบัติงานได้ถูกต้องตามมาตรฐานวิชาชีพ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P → M",
+          "ksa": "K, S",
+          "description": "Nursing documentation",
+          "teaching": [
+            "ClinicalPractice",
+            "Coaching"
+          ],
+          "assessment": [
+            "Portfolio",
+            "ClinicalPerfEval",
+            "LogBook"
+          ]
+        }
+      ]
+    },
+    "PLO8": {
+      "Theory": [
+        {
+          "code": "T8-CLO1",
+          "statement": "อธิบายแนวคิด หลักการ และจริยธรรมในการใช้สื่อสารสนเทศและเทคโนโลยีดิจิทัลในการเรียนรู้และการพยาบาล",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Understand",
+          "irpm": "I",
+          "ksa": "K, A",
+          "description": "พื้นฐาน Digital Literacy + Digital Ethics",
+          "teaching": [
+            "Lecture",
+            "FlippedClass",
+            "TechEnhanced"
+          ],
+          "assessment": [
+            "MCQ",
+            "ShortAnswer"
+          ]
+        },
+        {
+          "code": "T8-CLO2",
+          "statement": "สืบค้นข้อมูลและประเมินคุณภาพแหล่งข้อมูลที่น่าเชื่อถือเพื่อสนับสนุนการเรียนรู้และการพยาบาล",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Evaluate",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "Critical appraisal ของแหล่งข้อมูลออนไลน์",
+          "teaching": [
+            "TechEnhanced",
+            "EBPApplication",
+            "Inquiry"
+          ],
+          "assessment": [
+            "GroupReport",
+            "EBPProject",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "T8-CLO3",
+          "statement": "เลือกและประยุกต์ใช้สื่อและเทคโนโลยีดิจิทัลในการสื่อสารและนำเสนอข้อมูลทางการพยาบาลอย่างมีประสิทธิภาพ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "การใช้ digital tools ในการนำเสนอ",
+          "teaching": [
+            "TechEnhanced",
+            "ProjectBL"
+          ],
+          "assessment": [
+            "PresentationEval",
+            "InnovProject"
+          ]
+        },
+        {
+          "code": "T8-CLO4",
+          "statement": "ประยุกต์ใช้เทคโนโลยีและนวัตกรรมดิจิทัลเพื่อพัฒนาคุณภาพการพยาบาลและการดูแลสุขภาพ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "P → M",
+          "ksa": "K, S",
+          "description": "Digital innovation in nursing",
+          "teaching": [
+            "DesignThinking",
+            "ProjectBL",
+            "TechEnhanced"
+          ],
+          "assessment": [
+            "InnovProject",
+            "PresentationEval",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "T8-CLO5",
+          "statement": "ปฏิบัติตามหลักจริยธรรมและกฎหมายในการใช้ข้อมูลผู้รับบริการและเทคโนโลยีสารสนเทศ",
+          "bloom_domain": "Affective",
+          "bloom_level": "Valuing",
+          "irpm": "R → P",
+          "ksa": "A",
+          "description": "Data privacy + Patient confidentiality (PDPA, HIPAA)",
+          "teaching": [
+            "EthicsCase",
+            "GroupDiscussion"
+          ],
+          "assessment": [
+            "EthicsCase",
+            "BehaviorObs",
+            "ReflectiveJournal"
+          ]
+        }
+      ],
+      "Lab": [
+        {
+          "code": "L8-CLO1",
+          "statement": "ใช้โปรแกรมและแอปพลิเคชันพื้นฐานในการจัดทำและนำเสนอข้อมูลทางการพยาบาลในห้องทดลอง",
+          "bloom_domain": "Psychomotor",
+          "bloom_level": "Mechanism",
+          "irpm": "R",
+          "ksa": "S",
+          "description": "ทักษะการใช้ digital tools",
+          "teaching": [
+            "TechEnhanced",
+            "SkillsLab"
+          ],
+          "assessment": [
+            "SkillChecklist",
+            "PresentationEval"
+          ]
+        },
+        {
+          "code": "L8-CLO2",
+          "statement": "วิเคราะห์และสรุปข้อมูลจากสื่อดิจิทัลหรือฐานข้อมูลออนไลน์เพื่อประกอบการตัดสินใจทางการพยาบาล",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "Digital information analysis",
+          "teaching": [
+            "TechEnhanced",
+            "EBPApplication"
+          ],
+          "assessment": [
+            "EBPProject",
+            "GroupReport"
+          ]
+        },
+        {
+          "code": "L8-CLO3",
+          "statement": "นำเสนอข้อมูลและผลงานผ่านสื่อดิจิทัลในรูปแบบที่เหมาะสมกับผู้รับสาร",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "Digital storytelling / presentation",
+          "teaching": [
+            "TechEnhanced",
+            "ProjectBL"
+          ],
+          "assessment": [
+            "PresentationEval",
+            "PeerEval"
+          ]
+        }
+      ],
+      "Practice": [
+        {
+          "code": "P8-CLO1",
+          "statement": "สืบค้นข้อมูลผู้รับบริการผ่านระบบ HIS และประเมินข้อมูลเพื่อวางแผนการพยาบาลในสถานการณ์จริง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "ใช้ HIS/EHR ในคลินิก",
+          "teaching": [
+            "ClinicalPractice",
+            "BedsideTeaching"
+          ],
+          "assessment": [
+            "ClinicalPerfEval",
+            "Portfolio",
+            "DOPS"
+          ]
+        },
+        {
+          "code": "P8-CLO2",
+          "statement": "ใช้เทคโนโลยีและแอปพลิเคชันในการประเมินและติดตามผลการพยาบาลผู้รับบริการ",
+          "bloom_domain": "Psychomotor",
+          "bloom_level": "Mechanism",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "Digital health tools in clinical care",
+          "teaching": [
+            "ClinicalPractice",
+            "TechEnhanced"
+          ],
+          "assessment": [
+            "ClinicalPerfEval",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "P8-CLO3",
+          "statement": "ปฏิบัติการพยาบาลโดยรักษาความลับและปกป้องข้อมูลส่วนบุคคลของผู้รับบริการตามหลักจริยธรรม",
+          "bloom_domain": "Affective",
+          "bloom_level": "Organization",
+          "irpm": "P → M",
+          "ksa": "A",
+          "description": "Data privacy in clinical practice",
+          "teaching": [
+            "ClinicalPractice",
+            "Reflection"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "ReflectiveJournal",
+            "ClinicalPerfEval"
+          ]
+        },
+        {
+          "code": "P8-CLO4",
+          "statement": "ประยุกต์ใช้เทคโนโลยีและสื่อดิจิทัลในการให้ความรู้หรือฝึกทักษะแก่ผู้รับบริการและครอบครัว",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P → M",
+          "ksa": "K, S",
+          "description": "Digital health education",
+          "teaching": [
+            "ClinicalPractice",
+            "CommunityBased",
+            "ProjectBL"
+          ],
+          "assessment": [
+            "PresentationEval",
+            "BehaviorObs",
+            "Portfolio"
+          ]
+        }
+      ]
+    },
+    "PLO9": {
+      "Theory": [
+        {
+          "code": "T9-CLO1",
+          "statement": "อธิบายแนวคิดหลักปรัชญาเศรษฐกิจพอเพียง (3 ห่วง 2 เงื่อนไข) และการพัฒนาตนเองอย่างต่อเนื่อง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Understand",
+          "irpm": "I",
+          "ksa": "K, A",
+          "description": "พื้นฐานหลักปรัชญาเศรษฐกิจพอเพียง — ใช้ในวิชา 'เราคือ สบช.' และวิชาแกน",
+          "teaching": [
+            "Lecture",
+            "ActiveLearning",
+            "GroupDiscussion"
+          ],
+          "assessment": [
+            "MCQ",
+            "ShortAnswer",
+            "ReflectiveJournal"
+          ]
+        },
+        {
+          "code": "T9-CLO2",
+          "statement": "วิเคราะห์จุดเด่นและจุดที่ควรพัฒนาของตนเองเพื่อวางแผนพัฒนาตนเองให้ทันต่อสภาพการณ์ที่เปลี่ยนแปลง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "R",
+          "ksa": "K, A",
+          "description": "Self-analysis (SWOT-self) → Self-development plan",
+          "teaching": [
+            "Reflection",
+            "ActiveLearning",
+            "GroupDiscussion"
+          ],
+          "assessment": [
+            "ReflectiveJournal",
+            "SelfAssess",
+            "Portfolio"
+          ]
+        },
+        {
+          "code": "T9-CLO3",
+          "statement": "ประยุกต์ใช้หลักปรัชญาเศรษฐกิจพอเพียงในการดำเนินชีวิต การเรียนรู้ และการเตรียมพร้อมเข้าสู่วิชาชีพ",
+          "bloom_domain": "Affective",
+          "bloom_level": "Valuing",
+          "irpm": "R → P",
+          "ksa": "K, A",
+          "description": "Apply Sufficiency Economy Philosophy in daily life and learning",
+          "teaching": [
+            "Reflection",
+            "ProjectBL",
+            "GroupDiscussion"
+          ],
+          "assessment": [
+            "ReflectiveJournal",
+            "Portfolio",
+            "BehaviorObs"
+          ]
+        }
+      ],
+      "Lab": [
+        {
+          "code": "L9-CLO1",
+          "statement": "สะท้อนคิดและประเมินตนเองในการพัฒนาความรู้และทักษะหลังการฝึกในสถานการณ์จำลอง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Evaluate",
+          "irpm": "R → P",
+          "ksa": "K, A",
+          "description": "Reflective practice หลัง Sim",
+          "teaching": [
+            "Reflection",
+            "Simulation"
+          ],
+          "assessment": [
+            "ReflectiveJournal",
+            "SelfAssess"
+          ]
+        }
+      ],
+      "Practice": [
+        {
+          "code": "P9-CLO1",
+          "statement": "ปรับตัวต่อสถานการณ์ที่เปลี่ยนแปลงและจัดการอารมณ์/ความเครียดของตนเองในการปฏิบัติการพยาบาล",
+          "bloom_domain": "Affective",
+          "bloom_level": "Organization",
+          "irpm": "P",
+          "ksa": "A, S",
+          "description": "Emotional regulation + Adaptability ในคลินิก",
+          "teaching": [
+            "ClinicalPractice",
+            "Reflection",
+            "Coaching"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "ReflectiveJournal",
+            "ClinicalPerfEval"
+          ]
+        },
+        {
+          "code": "P9-CLO2",
+          "statement": "ปฏิบัติงานโดยประยุกต์ใช้หลักปรัชญาเศรษฐกิจพอเพียงและแสดงพฤติกรรมการพัฒนาตนเองอย่างต่อเนื่อง",
+          "bloom_domain": "Affective",
+          "bloom_level": "Characterization",
+          "irpm": "M",
+          "ksa": "A",
+          "description": "ระดับสูงสุด — แสดงเป็นเอกลักษณ์",
+          "teaching": [
+            "ClinicalPractice",
+            "Reflection",
+            "PreceptorshipPracticum"
+          ],
+          "assessment": [
+            "BehaviorObs",
+            "ReflectiveJournal",
+            "Portfolio"
+          ]
+        }
+      ]
+    },
+    "PLO10": {
+      "Theory": [
+        {
+          "code": "T10-CLO1",
+          "statement": "อธิบายแนวคิดและหลักการของการเป็นผู้ประกอบการด้านสุขภาพ (Health Entrepreneurship) ในบริบทไทยและสากล",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Understand",
+          "irpm": "I",
+          "ksa": "K",
+          "description": "พื้นฐาน Health Entrepreneurship — PLO ใหม่ในหลักสูตร 2567",
+          "teaching": [
+            "Lecture",
+            "FlippedClass",
+            "GroupDiscussion"
+          ],
+          "assessment": [
+            "MCQ",
+            "ShortAnswer"
+          ]
+        },
+        {
+          "code": "T10-CLO2",
+          "statement": "วิเคราะห์โอกาส คุณค่า และความท้าทายในการเป็นผู้ประกอบการด้านสุขภาพในบริบทของระบบสาธารณสุขไทย",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Analyze",
+          "irpm": "R",
+          "ksa": "K",
+          "description": "Market analysis / opportunity recognition",
+          "teaching": [
+            "CBL",
+            "GroupDiscussion",
+            "Inquiry"
+          ],
+          "assessment": [
+            "CaseStudyReport",
+            "GroupReport"
+          ]
+        },
+        {
+          "code": "T10-CLO3",
+          "statement": "ออกแบบแผนธุรกิจหรือนวัตกรรมการบริการสุขภาพอย่างสร้างสรรค์ที่สอดคล้องกับกฎหมายและจรรยาบรรณวิชาชีพ",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "P",
+          "ksa": "K, S",
+          "description": "Business plan / Service innovation design",
+          "teaching": [
+            "DesignThinking",
+            "ProjectBL"
+          ],
+          "assessment": [
+            "InnovProject",
+            "PresentationEval"
+          ]
+        }
+      ],
+      "Lab": [
+        {
+          "code": "L10-CLO1",
+          "statement": "ฝึกพัฒนาแผนธุรกิจ Lean Canvas หรือต้นแบบนวัตกรรมการบริการสุขภาพในสถานการณ์จำลอง",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Create",
+          "irpm": "R → P",
+          "ksa": "K, S",
+          "description": "Practical lab for entrepreneurship",
+          "teaching": [
+            "DesignThinking",
+            "ProjectBL",
+            "TBL"
+          ],
+          "assessment": [
+            "InnovProject",
+            "GroupReport",
+            "PresentationEval"
+          ]
+        }
+      ],
+      "Practice": [
+        {
+          "code": "P10-CLO1",
+          "statement": "ประยุกต์ใช้แนวคิดผู้ประกอบการด้านสุขภาพในการพัฒนาบริการการพยาบาลและการดูแลสุขภาพในชุมชน",
+          "bloom_domain": "Cognitive",
+          "bloom_level": "Apply",
+          "irpm": "P",
+          "ksa": "K, S, A",
+          "description": "ใช้ในวิชาปฏิบัติชุมชน/บริหาร — บูรณาการกับ PLO5, PLO6",
+          "teaching": [
+            "CommunityBased",
+            "ProjectBL",
+            "ClinicalConference"
+          ],
+          "assessment": [
+            "InnovProject",
+            "Portfolio",
+            "ClinicalPerfEval"
+          ]
+        }
+      ]
+    }
+  },
+  "examples": [
+    {
+      "course": "พย.1420 การพยาบาลมารดา ทารก และการผดุงครรภ์ 2",
+      "credit": "3(3-0-6) ทฤษฎี",
+      "year": "ปี 3 ภาคต้น",
+      "type": "ทฤษฎี",
+      "description": "วิชาทฤษฎี ครอบคลุมการพยาบาลมารดาที่มีภาวะเสี่ยงสูงในระยะตั้งครรภ์ คลอด และหลังคลอด ทารกที่มีภาวะเสี่ยง 9 บท 45 ชั่วโมง",
+      "primary_plo": "PLO1, PLO4",
+      "secondary_plo": "PLO5, PLO9",
+      "course_clos": [
+        {
+          "code": "CLO1",
+          "statement": "อธิบายแนวคิด ทฤษฎี และพยาธิสภาพที่เกี่ยวข้องกับมารดาที่มีภาวะเสี่ยงสูงและทารกที่มีภาวะเสี่ยงสูง",
+          "central_clo": "T1-CLO1, T1-CLO2",
+          "plo_align": "PLO1.1/R",
+          "bloom": "Cognitive — Understand → Analyze",
+          "irpm": "R",
+          "teaching": "Lecture, FlippedClass, ConceptMapping, CBL",
+          "assessment": "MCQ, ShortAnswer, ConceptMapEval"
+        },
+        {
+          "code": "CLO2",
+          "statement": "วิเคราะห์ปัจจัยเสี่ยง ภาวะแทรกซ้อน และผลกระทบของภาวะเสี่ยงสูงในระยะตั้งครรภ์ ระยะคลอด และระยะหลังคลอด",
+          "central_clo": "T1-CLO4, T4-CLO2",
+          "plo_align": "PLO1.2/R, PLO4.1/R",
+          "bloom": "Cognitive — Analyze",
+          "irpm": "R",
+          "teaching": "PBL, CBL, GroupDiscussion",
+          "assessment": "CaseStudyReport, EssayExam"
+        },
+        {
+          "code": "CLO3",
+          "statement": "ประยุกต์ใช้ความรู้ทางการพยาบาลและการผดุงครรภ์ในการประเมินและวางแผนการพยาบาลมารดาทารกที่มีภาวะเสี่ยงสูงด้วยกระบวนการพยาบาล",
+          "central_clo": "T1-CLO3, T1-CLO5",
+          "plo_align": "PLO1.1/R, PLO1.2/R",
+          "bloom": "Cognitive — Apply → Evaluate",
+          "irpm": "R → P",
+          "teaching": "CBL, PBL, Simulation",
+          "assessment": "CarePlan, CaseStudyReport, MCQ"
+        },
+        {
+          "code": "CLO4",
+          "statement": "ออกแบบแผนการพยาบาลมารดาทารกที่มีภาวะเสี่ยงสูงโดยบูรณาการหลักฐานเชิงประจักษ์ (RTCOG, ACOG, WHO) และคำนึงถึงการใช้ยาอย่างสมเหตุผล",
+          "central_clo": "T1-CLO6, T4-CLO4",
+          "plo_align": "PLO1.1/R, PLO1.2/R, PLO4.2/R, PLO5.1/R",
+          "bloom": "Cognitive — Create",
+          "irpm": "R → P",
+          "teaching": "PBL, DesignThinking, EBPApplication",
+          "assessment": "CarePlan, InnovProject, PresentationEval"
+        },
+        {
+          "code": "CLO5",
+          "statement": "วิเคราะห์จุดเด่นและจุดที่ควรพัฒนาของตนเองในการเรียนรู้การพยาบาลมารดาทารกในภาวะเสี่ยงสูงเพื่อวางแผนพัฒนาตนเองสู่วิชาชีพ",
+          "central_clo": "T9-CLO2",
+          "plo_align": "PLO9.1/R",
+          "bloom": "Cognitive — Analyze + Affective — Valuing",
+          "irpm": "R",
+          "teaching": "Reflection, GroupDiscussion",
+          "assessment": "ReflectiveJournal, SelfAssess"
+        }
+      ]
+    },
+    {
+      "course": "การพยาบาลขั้นพื้นฐาน",
+      "credit": "3(2-3-4) ทฤษฎี + ทดลอง",
+      "year": "ปี 2 ภาคต้น",
+      "type": "ทฤษฎี + ทดลอง",
+      "description": "วิชาฐานทักษะการพยาบาลขั้นพื้นฐาน — เป็นวิชาที่นักศึกษาจะได้สัมผัสทักษะวิชาชีพเป็นครั้งแรก",
+      "primary_plo": "PLO1, PLO2",
+      "secondary_plo": "PLO3, PLO7",
+      "course_clos": [
+        {
+          "code": "CLO1",
+          "statement": "อธิบายแนวคิดและหลักการการพยาบาลขั้นพื้นฐานในการดูแลบุคคลทุกช่วงวัย",
+          "central_clo": "T1-CLO1, T2-CLO1",
+          "plo_align": "PLO1.1/I, PLO2.1/I",
+          "bloom": "Cognitive — Understand",
+          "irpm": "I",
+          "teaching": "Lecture, FlippedClass, ConceptMapping",
+          "assessment": "MCQ, ShortAnswer, ConceptMapEval"
+        },
+        {
+          "code": "CLO2",
+          "statement": "ประยุกต์ใช้แนวคิดและหลักการการพยาบาลขั้นพื้นฐานในการประเมินและวางแผนการพยาบาลด้วยกระบวนการพยาบาล",
+          "central_clo": "T1-CLO3",
+          "plo_align": "PLO1.1/I",
+          "bloom": "Cognitive — Apply",
+          "irpm": "I → R",
+          "teaching": "CBL, ActiveLearning, Simulation",
+          "assessment": "CarePlan, CaseStudyReport, MCQ"
+        },
+        {
+          "code": "CLO3",
+          "statement": "สาธิตทักษะการพยาบาลขั้นพื้นฐานในห้องทดลองได้อย่างถูกต้องตามขั้นตอน (เช่น การวัดสัญญาณชีพ ฉีดยา ใส่สาย CR แผล Suction)",
+          "central_clo": "L1-CLO1, L2-CLO1, L2-CLO2",
+          "plo_align": "PLO1.1/I, PLO2.1/I",
+          "bloom": "Psychomotor — Guided Response → Mechanism",
+          "irpm": "I → R",
+          "teaching": "Demonstration, SkillsLab, Simulation",
+          "assessment": "SkillChecklist, ReturnDemoEval, OSCE"
+        },
+        {
+          "code": "CLO4",
+          "statement": "แสดงเจตคติที่ดีต่อผู้รับบริการและเคารพในศักดิ์ศรีของผู้รับบริการในการฝึกปฏิบัติทักษะ",
+          "central_clo": "L3-CLO1",
+          "plo_align": "PLO3.1/I",
+          "bloom": "Affective — Responding",
+          "irpm": "I",
+          "teaching": "Simulation, RolePlay, Reflection",
+          "assessment": "BehaviorObs, ReflectiveJournal, PeerEval"
+        },
+        {
+          "code": "CLO5",
+          "statement": "เขียนบันทึกการพยาบาลในรูปแบบที่ถูกต้องตามมาตรฐานวิชาชีพ",
+          "central_clo": "T7-CLO3",
+          "plo_align": "PLO7.2/I",
+          "bloom": "Cognitive — Apply",
+          "irpm": "I → R",
+          "teaching": "Coaching, ActiveLearning",
+          "assessment": "Portfolio, EssayExam"
+        }
+      ]
+    },
+    {
+      "course": "ปฏิบัติการพยาบาลมารดา ทารก และการผดุงครรภ์ 1",
+      "credit": "3(0-9-0) ปฏิบัติ",
+      "year": "ปี 3 ภาคปลาย",
+      "type": "ปฏิบัติ (Clinical Practicum)",
+      "description": "วิชาปฏิบัติการพยาบาลมารดาทารกในระยะคลอดปกติ การทำคลอดปกติ การดูแลทารกแรกเกิด — Clinical placement ในโรงพยาบาล",
+      "primary_plo": "PLO2, PLO3, PLO4",
+      "secondary_plo": "PLO6, PLO7, PLO9",
+      "course_clos": [
+        {
+          "code": "CLO1",
+          "statement": "ปฏิบัติการพยาบาลและการผดุงครรภ์แบบองค์รวมด้วยหัวใจความเป็นมนุษย์โดยใช้กระบวนการพยาบาลในการดูแลมารดาทารกในระยะคลอดปกติ",
+          "central_clo": "P2-CLO1, P2-CLO2",
+          "plo_align": "PLO2.1/P, PLO2.2/P",
+          "bloom": "Psychomotor — Mechanism → Complex Overt Response",
+          "irpm": "P",
+          "teaching": "ClinicalPractice, BedsideTeaching, PreceptorshipPracticum",
+          "assessment": "ClinicalPerfEval, DOPS, CarePlan, Portfolio"
+        },
+        {
+          "code": "CLO2",
+          "statement": "ตัดสินใจเชิงจริยธรรมและเคารพสิทธิผู้รับบริการในการพยาบาลมารดาทารก โดยคำนึงถึงความหลากหลายทางวัฒนธรรม",
+          "central_clo": "P3-CLO1, P3-CLO2",
+          "plo_align": "PLO3.1/P, PLO3.2/P, PLO2.4/P",
+          "bloom": "Affective — Valuing → Organization",
+          "irpm": "P",
+          "teaching": "ClinicalPractice, Reflection, ClinicalConference",
+          "assessment": "BehaviorObs, EthicsCase, ReflectiveJournal, ClinicalPerfEval"
+        },
+        {
+          "code": "CLO3",
+          "statement": "ใช้การคิดอย่างมีวิจารณญาณในการแก้ปัญหาทางคลินิกในการพยาบาลมารดาทารกในระยะคลอด",
+          "central_clo": "P4-CLO1",
+          "plo_align": "PLO4.1/P",
+          "bloom": "Cognitive — Evaluate",
+          "irpm": "P",
+          "teaching": "ClinicalPractice, ClinicalConference, Reflection",
+          "assessment": "ClinicalPerfEval, CarePlan, ReflectiveJournal"
+        },
+        {
+          "code": "CLO4",
+          "statement": "แสดงบทบาทผู้นำและประสานความร่วมมือกับทีมสุขภาพในการดูแลมารดาทารก",
+          "central_clo": "P6-CLO1",
+          "plo_align": "PLO6.1/P",
+          "bloom": "Affective — Valuing + Psychomotor",
+          "irpm": "P",
+          "teaching": "ClinicalPractice, ClinicalConference, Coaching",
+          "assessment": "BehaviorObs, PeerEval, ClinicalPerfEval, Portfolio"
+        },
+        {
+          "code": "CLO5",
+          "statement": "สื่อสารและให้ข้อมูลสุขภาพแก่มารดา ครอบครัว และทีมสุขภาพได้อย่างเหมาะสม",
+          "central_clo": "P7-CLO1, P7-CLO2",
+          "plo_align": "PLO7.3/P",
+          "bloom": "Cognitive — Apply",
+          "irpm": "P",
+          "teaching": "ClinicalPractice, BedsideTeaching",
+          "assessment": "DOPS, BehaviorObs, ClinicalPerfEval"
+        },
+        {
+          "code": "CLO6",
+          "statement": "ปรับตัวต่อสถานการณ์ที่เปลี่ยนแปลงและจัดการอารมณ์ความเครียดในการดูแลมารดาทารกในระยะคลอด",
+          "central_clo": "P9-CLO1",
+          "plo_align": "PLO9.1/P, PLO9.2/P",
+          "bloom": "Affective — Organization",
+          "irpm": "P",
+          "teaching": "Reflection, Coaching, ClinicalPractice",
+          "assessment": "BehaviorObs, ReflectiveJournal, ClinicalPerfEval"
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "totalPlos": 10,
+    "totalClos": 86,
+    "totalTheory": 38,
+    "totalLab": 20,
+    "totalPractice": 28,
+    "totalTeachingMethods": 28,
+    "totalAssessmentMethods": 26,
+    "totalActionVerbs": 118
+  }
+};
+
+// === ROUTING ===
+const pages = ['home','theory','verbs','clos','builder','examples','templates','about'];
+function routeTo(page) {
+  if (!pages.includes(page)) page = 'home';
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-link[data-page="' + page + '"]').forEach(a => a.classList.add('active'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('sidebar').classList.remove('open');
+}
+window.addEventListener('hashchange', () => {
+  routeTo(location.hash.replace('#','') || 'home');
+});
+
+// === HOME ===
+function renderHome() {
+  const stats = [
+    { n: DATA.stats.totalPlos, l: 'PLO ของหลักสูตร' },
+    { n: DATA.stats.totalClos, l: 'CLO กลางทั้งหมด' },
+    { n: DATA.stats.totalActionVerbs, l: 'คำกริยาไทย-อังกฤษ' },
+    { n: DATA.stats.totalTeachingMethods, l: 'วิธีสอน' },
+    { n: DATA.stats.totalAssessmentMethods, l: 'การวัดประเมิน' },
+    { n: DATA.examples.length, l: 'ตัวอย่างรายวิชา' },
+  ];
+  document.getElementById('statsGrid').innerHTML = stats.map(s => `
+    <div class="stat-card">
+      <div class="stat-number">${s.n}</div>
+      <div class="stat-label">${s.l}</div>
+    </div>
+  `).join('');
+  
+  const features = [
+    { icon: '◇', title: 'ทฤษฎี Bloom · IRPM', desc: 'ทำความเข้าใจกรอบแนวคิด Bloom\'s Revised Taxonomy 3 โดเมน และกรอบการพัฒนา IRPM ตลอดช่วงเวลาของหลักสูตร', page: 'theory' },
+    { icon: '⌕', title: 'คลังคำกริยา', desc: 'ค้นหาและกรอง action verbs ภาษาไทย-อังกฤษ 118 คำตามโดเมน Bloom level และระดับ IRPM ที่ต้องการ', page: 'verbs' },
+    { icon: '☷', title: 'CLO กลาง 10 PLO', desc: 'เลือกดู CLO กลาง 86 ตัว ครอบคลุมทฤษฎี ทดลอง ปฏิบัติ พร้อมวิธีสอนและการประเมินที่สอดคล้อง', page: 'clos' },
+    { icon: '⚙', title: 'เครื่องมือออกแบบ CLO', desc: 'ระบบช่วยร่าง CLO รายวิชาเพียงเลือก PLO + IRPM + ภาค ระบบจะแนะนำ Bloom level และ action verbs ให้', page: 'builder' },
+    { icon: '⌬', title: 'Worked Examples', desc: 'ดูตัวอย่างการเขียน CLO ของรายวิชาจริง 3 รายวิชาที่ครอบคลุมทฤษฎี ทดลอง และปฏิบัติทางคลินิก', page: 'examples' },
+    { icon: '✓', title: 'Template + Checklist', desc: 'แม่แบบสำหรับ มคอ.3 และ Checklist ตรวจสอบคุณภาพ CLO ก่อนนำเสนอต่อคณะกรรมการหลักสูตร', page: 'templates' },
+  ];
+  document.getElementById('featuresGrid').innerHTML = features.map(f => `
+    <div class="feature-card" data-nav="${f.page}">
+      <div class="feature-icon">${f.icon}</div>
+      <div class="feature-title">${f.title}</div>
+      <div class="feature-desc">${f.desc}</div>
+    </div>
+  `).join('');
+  
+  // Click navigation on feature cards
+  document.querySelectorAll('[data-nav]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      location.hash = '#' + el.dataset.nav;
+    });
+  });
+}
+
+// === THEORY ===
+function renderTheory() {
+  const bloom = {
+    Cognitive: {
+      thai: 'พุทธิพิสัย', en: 'Cognitive Domain',
+      desc: 'ความรู้และทักษะการคิด',
+      class: 'cognitive',
+      levels: [
+        ['1', 'Remember (จำ)', 'การจดจำ ระบุชื่อ ทบทวน บอกได้'],
+        ['2', 'Understand (เข้าใจ)', 'การอธิบาย ตีความ สรุป เปรียบเทียบ'],
+        ['3', 'Apply (ประยุกต์ใช้)', 'การนำความรู้ไปใช้ในสถานการณ์ใหม่'],
+        ['4', 'Analyze (วิเคราะห์)', 'การแยกแยะองค์ประกอบ หาความสัมพันธ์'],
+        ['5', 'Evaluate (ประเมินค่า)', 'การตัดสิน ประเมินบนเกณฑ์/หลักฐาน'],
+        ['6', 'Create (สร้างสรรค์)', 'การสร้าง ออกแบบ พัฒนา สังเคราะห์'],
+      ]
+    },
+    Affective: {
+      thai: 'จิตพิสัย', en: 'Affective Domain',
+      desc: 'เจตคติ ค่านิยม พฤติกรรม',
+      class: 'affective',
+      levels: [
+        ['1', 'Receiving (การรับรู้)', 'การตระหนักรู้ ใส่ใจ ตั้งใจฟัง'],
+        ['2', 'Responding (การตอบสนอง)', 'การยอมตอบสนอง ปฏิบัติตาม เข้าร่วม'],
+        ['3', 'Valuing (การเห็นคุณค่า)', 'การให้ความสำคัญและแสดงความมุ่งมั่น'],
+        ['4', 'Organization (การจัดระบบคุณค่า)', 'การบูรณาการคุณค่าในระบบของตน'],
+        ['5', 'Characterization (การยึดเป็นเอกลักษณ์)', 'การยึดมั่นจนเป็นแบบแผนถาวร'],
+      ]
+    },
+    Psychomotor: {
+      thai: 'ทักษะพิสัย', en: 'Psychomotor Domain',
+      desc: 'ทักษะการปฏิบัติและเคลื่อนไหว',
+      class: 'psychomotor',
+      levels: [
+        ['1', 'Perception (การรับรู้)', 'การใช้ประสาทสัมผัสรับรู้สัญญาณ'],
+        ['2', 'Set (ความพร้อม)', 'การเตรียมพร้อมก่อนปฏิบัติ'],
+        ['3', 'Guided Response', 'การฝึกตามแบบภายใต้การกำกับ'],
+        ['4', 'Mechanism (กลไก)', 'การปฏิบัติได้ด้วยตนเองอย่างคล่อง'],
+        ['5', 'Complex Overt Response', 'การปฏิบัติชำนาญในงานซับซ้อน'],
+        ['6', 'Adaptation (การปรับใช้)', 'การปรับทักษะให้เข้ากับสถานการณ์ใหม่'],
+        ['7', 'Origination (การริเริ่ม)', 'การคิดค้นวิธีปฏิบัติใหม่'],
+      ]
+    },
+  };
+  document.getElementById('bloomDomains').innerHTML = Object.entries(bloom).map(([k, d]) => `
+    <div class="bloom-domain ${d.class}">
+      <h3>${d.thai} <span class="en">— ${d.en}</span></h3>
+      <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:0.5rem">${d.desc}</p>
+      <div class="bloom-levels">
+        ${d.levels.map(([n, name, desc]) => `
+          <div class="bloom-level">
+            <div class="bloom-level-num">${n}</div>
+            <div class="bloom-level-name"><strong>${name}</strong> — ${desc}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  
+  // IRPM
+  document.getElementById('irpmGrid').innerHTML = ['I','R','P','M'].map(code => {
+    const irpm = DATA.irpm[code];
+    return `
+      <div class="irpm-card irpm-${code.toLowerCase()}">
+        <div class="irpm-badge">${code}</div>
+        <div class="irpm-name">${irpm.name}</div>
+        <div class="irpm-desc">${irpm.description}</div>
+        <div class="irpm-year">${irpm.expected_year}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// === VERBS ===
+function renderVerbs() {
+  const domain = document.getElementById('filterDomain').value;
+  const irpm = document.getElementById('filterIrpm').value;
+  const search = document.getElementById('filterVerb').value.toLowerCase().trim();
+  
+  let html = '';
+  let count = 0;
+  for (const [domName, levels] of Object.entries(DATA.actionVerbs)) {
+    if (domain && domain !== domName) continue;
+    for (const [levelName, info] of Object.entries(levels)) {
+      if (irpm && !info.irpm.includes(irpm)) continue;
+      
+      let filteredThai = info.thai;
+      let filteredEn = info.english;
+      if (search) {
+        filteredThai = info.thai.filter(v => v.toLowerCase().includes(search));
+        filteredEn = info.english.filter(v => v.toLowerCase().includes(search));
+        if (filteredThai.length === 0 && filteredEn.length === 0) continue;
+      }
+      count++;
+      
+      html += `
+        <div class="verb-group">
+          <div class="verb-group-header">
+            <div class="verb-group-domain">${domName}</div>
+            <div class="verb-group-level">${levelName}</div>
+            <div class="verb-group-irpm">IRPM: ${info.irpm}</div>
+          </div>
+          <div class="verb-list">
+            <div>
+              <div class="verb-col-label">ภาษาไทย (${filteredThai.length} คำ)</div>
+              <div class="verb-tags">
+                ${filteredThai.map(v => `<span class="verb-tag">${v}</span>`).join('')}
+              </div>
+            </div>
+            <div>
+              <div class="verb-col-label">ภาษาอังกฤษ (${filteredEn.length} คำ)</div>
+              <div class="verb-tags">
+                ${filteredEn.map(v => `<span class="verb-tag en">${v}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  }
+  
+  if (count === 0) {
+    html = '<div class="empty-state"><div class="icon">∅</div><p>ไม่พบคำกริยาที่ตรงกับเกณฑ์ที่กำหนด ลองล้างตัวกรองหรือเปลี่ยนคำค้นหา</p></div>';
+  }
+  document.getElementById('verbResults').innerHTML = html;
+}
+function setupVerbFilters() {
+  ['filterDomain', 'filterIrpm', 'filterVerb'].forEach(id => {
+    document.getElementById(id).addEventListener('input', renderVerbs);
+  });
+  document.getElementById('filterClear').addEventListener('click', () => {
+    document.getElementById('filterDomain').value = '';
+    document.getElementById('filterIrpm').value = '';
+    document.getElementById('filterVerb').value = '';
+    renderVerbs();
+  });
+}
+
+// === CLOS ===
+let currentPlo = 'PLO1';
+let currentComponent = 'Theory';
+function renderPloTabs() {
+  const ploCodes = Object.keys(DATA.plos);
+  document.getElementById('ploTabs').innerHTML = ploCodes.map(code => `
+    <button class="plo-tab ${code === currentPlo ? 'active' : ''}" data-plo="${code}">
+      ${code}
+    </button>
+  `).join('');
+  document.querySelectorAll('.plo-tab').forEach(t => {
+    t.addEventListener('click', () => {
+      currentPlo = t.dataset.plo;
+      currentComponent = 'Theory';
+      renderPloTabs();
+      renderPloContent();
+    });
+  });
+}
+function renderPloContent() {
+  const plo = DATA.plos[currentPlo];
+  const fw = DATA.framework[currentPlo];
+  const counts = {
+    Theory: (fw.Theory || []).length,
+    Lab: (fw.Lab || []).length,
+    Practice: (fw.Practice || []).length,
+  };
+  
+  let html = `
+    <div class="plo-content">
+      <div class="plo-statement">
+        <strong>${currentPlo}:</strong> ${plo.full}
+      </div>
+      <div class="plo-domain">โดเมนหลัก: ${plo.domain}</div>
+      ${(plo.sub_plos && plo.sub_plos.length) ? `
+        <div style="margin-bottom:1.25rem">
+          <div style="font-size:0.85rem;color:var(--text-muted);font-weight:600;margin-bottom:0.4rem">Sub-PLOs:</div>
+          ${plo.sub_plos.map(s => `<div style="font-size:0.92rem;padding:0.2rem 0;color:var(--text)">— ${s}</div>`).join('')}
+        </div>
+      ` : ''}
+      
+      <div class="component-tabs">
+        ${['Theory','Lab','Practice'].map(c => {
+          const labels = { Theory: 'ทฤษฎี', Lab: 'ทดลอง', Practice: 'ปฏิบัติ' };
+          return `<button class="component-tab ${c === currentComponent ? 'active' : ''}" data-c="${c}">${labels[c]} <span class="count">${counts[c]}</span></button>`;
+        }).join('')}
+      </div>
+      
+      <div class="clo-list">
+        ${(fw[currentComponent] || []).map(clo => renderCloCard(clo)).join('')}
+        ${(fw[currentComponent] || []).length === 0 ? '<div class="empty-state"><p>ยังไม่มี CLO กลางในภาคนี้สำหรับ PLO นี้</p></div>' : ''}
+      </div>
+    </div>
+  `;
+  document.getElementById('ploContent').innerHTML = html;
+  
+  document.querySelectorAll('.component-tab').forEach(t => {
+    t.addEventListener('click', () => {
+      currentComponent = t.dataset.c;
+      renderPloContent();
+    });
+  });
+}
+function renderCloCard(clo) {
+  const domClass = clo.bloom_domain.toLowerCase();
+  const teachLabels = clo.teaching.map(c => DATA.teachingMethods[c] || c);
+  const assessLabels = clo.assessment.map(c => DATA.assessmentMethods[c] || c);
+  return `
+    <div class="clo-card">
+      <div class="clo-header">
+        <div class="clo-code">${clo.code}</div>
+        <div class="clo-statement">${clo.statement}</div>
+      </div>
+      <div class="clo-meta">
+        <span class="meta-pill ${domClass}">${clo.bloom_domain}</span>
+        <span class="meta-pill bloom-level">${clo.bloom_level}</span>
+        <span class="meta-pill irpm">IRPM: ${clo.irpm}</span>
+        <span class="meta-pill ksa">${clo.ksa}</span>
+      </div>
+      <div class="clo-detail">
+        <div class="clo-detail-block">
+          <div class="clo-detail-label">วิธีสอนที่แนะนำ</div>
+          <ul class="clo-detail-list">${teachLabels.map(t => `<li>${t}</li>`).join('')}</ul>
+        </div>
+        <div class="clo-detail-block">
+          <div class="clo-detail-label">การวัดและประเมิน</div>
+          <ul class="clo-detail-list">${assessLabels.map(a => `<li>${a}</li>`).join('')}</ul>
+        </div>
+      </div>
+      <div class="clo-description">${clo.description}</div>
+    </div>
+  `;
+}
+
+// === BUILDER ===
+function setupBuilder() {
+  // Populate PLO dropdown
+  const sel = document.getElementById('bPlo');
+  Object.entries(DATA.plos).forEach(([code, info]) => {
+    const opt = document.createElement('option');
+    opt.value = code;
+    opt.textContent = `${code} — ${info.short}`;
+    sel.appendChild(opt);
+  });
+  
+  ['bPlo', 'bIrpm', 'bComponent'].forEach(id => {
+    document.getElementById(id).addEventListener('change', updateBuilder);
+  });
+  
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const text = document.getElementById('bOutputText').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.classList.add('copied');
+      btn.textContent = 'คัดลอกแล้ว ✓';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.textContent = 'คัดลอก';
+      }, 2000);
+    });
+  });
+}
+function updateBuilder() {
+  const plo = document.getElementById('bPlo').value;
+  const irpm = document.getElementById('bIrpm').value;
+  const comp = document.getElementById('bComponent').value;
+  
+  if (!plo || !irpm || !comp) {
+    document.getElementById('builderResults').classList.remove('visible');
+    document.getElementById('bEmptyState').style.display = '';
+    return;
+  }
+  document.getElementById('builderResults').classList.add('visible');
+  document.getElementById('bEmptyState').style.display = 'none';
+  
+  // Find matching central CLOs
+  const fw = DATA.framework[plo];
+  const candidates = (fw[comp] || []).filter(c => c.irpm.includes(irpm));
+  
+  document.getElementById('bMatchCount').textContent = `${candidates.length} ตัว`;
+  
+  if (candidates.length === 0) {
+    document.getElementById('bMatchedClos').innerHTML = `
+      <div class="empty-state" style="padding:1.5rem">
+        <p>ไม่พบ CLO กลางที่ตรงกับเกณฑ์ — แนะนำให้พิจารณา IRPM ใกล้เคียง หรือดู CLO กลางในภาคอื่น ๆ ที่ครอบคลุม PLO นี้</p>
+      </div>
+    `;
+  } else {
+    document.getElementById('bMatchedClos').innerHTML = candidates.map(c => renderCloCard(c)).join('');
+  }
+  
+  // Recommended action verbs
+  const blooms = new Set(candidates.map(c => `${c.bloom_domain}::${c.bloom_level}`));
+  let verbHtml = '';
+  if (blooms.size === 0) {
+    // Fallback: suggest based on IRPM × component
+    const irpmDomainHints = {
+      Theory: ['Cognitive'],
+      Lab: ['Psychomotor', 'Cognitive'],
+      Practice: ['Psychomotor', 'Affective', 'Cognitive'],
+    };
+    const irpmBloomDefault = {
+      I: { Cognitive: ['Remember','Understand'], Affective: ['Receiving'], Psychomotor: ['Perception','Set'] },
+      R: { Cognitive: ['Understand','Apply'], Affective: ['Responding'], Psychomotor: ['Guided Response'] },
+      P: { Cognitive: ['Apply','Analyze','Evaluate'], Affective: ['Valuing','Organization'], Psychomotor: ['Mechanism'] },
+      M: { Cognitive: ['Evaluate','Create'], Affective: ['Organization','Characterization'], Psychomotor: ['Complex Overt Response','Adaptation'] },
+    };
+    irpmDomainHints[comp].forEach(dom => {
+      irpmBloomDefault[irpm][dom].forEach(lv => blooms.add(`${dom}::${lv}`));
+    });
+  }
+  
+  blooms.forEach(b => {
+    const [dom, lv] = b.split('::');
+    if (DATA.actionVerbs[dom] && DATA.actionVerbs[dom][lv]) {
+      const av = DATA.actionVerbs[dom][lv];
+      verbHtml += `
+        <div class="verb-group" style="margin-bottom:0.5rem;border-radius:8px;border:1px solid var(--border-subtle)">
+          <div class="verb-group-header">
+            <div class="verb-group-domain">${dom}</div>
+            <div class="verb-group-level">${lv}</div>
+          </div>
+          <div class="verb-list">
+            <div>
+              <div class="verb-col-label">ภาษาไทย</div>
+              <div class="verb-tags">${av.thai.map(v => `<span class="verb-tag">${v}</span>`).join('')}</div>
+            </div>
+            <div>
+              <div class="verb-col-label">ภาษาอังกฤษ</div>
+              <div class="verb-tags">${av.english.map(v => `<span class="verb-tag en">${v}</span>`).join('')}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  });
+  document.getElementById('bRecommendedVerbs').innerHTML = verbHtml;
+  
+  // Generate template CLO sentence
+  const ploInfo = DATA.plos[plo];
+  let mainVerbs = [];
+  if (candidates.length > 0) {
+    const firstClo = candidates[0];
+    if (DATA.actionVerbs[firstClo.bloom_domain] && DATA.actionVerbs[firstClo.bloom_domain][firstClo.bloom_level]) {
+      mainVerbs = DATA.actionVerbs[firstClo.bloom_domain][firstClo.bloom_level].thai.slice(0, 3);
+    }
+  }
+  if (mainVerbs.length === 0) {
+    blooms.forEach(b => {
+      const [dom, lv] = b.split('::');
+      if (DATA.actionVerbs[dom] && DATA.actionVerbs[dom][lv]) {
+        mainVerbs.push(...DATA.actionVerbs[dom][lv].thai.slice(0, 2));
+      }
+    });
+  }
+  const verbHint = mainVerbs.slice(0, 3).join(' / ');
+  
+  const compLabel = { Theory: 'ทฤษฎี', Lab: 'ทดลอง', Practice: 'ปฏิบัติ' }[comp];
+  const irpmLabel = DATA.irpm[irpm].name;
+  
+  const tpl = `
+    <strong>[${verbHint}]</strong> 
+    <span class="builder-output-placeholder">[ระบุเนื้อหาเฉพาะของรายวิชา]</span> 
+    ในบริบท<span class="builder-output-placeholder">[ระบุกลุ่มเป้าหมาย/สถานการณ์]</span> 
+    เพื่อตอบสนอง <strong>${plo}</strong> 
+    ในระดับ <strong>${irpm}</strong> (${irpmLabel}) 
+    ภาค${compLabel}
+  `;
+  document.getElementById('bOutputText').innerHTML = tpl;
+}
+
+// === EXAMPLES ===
+function renderExamples() {
+  document.getElementById('examplesContent').innerHTML = DATA.examples.map((ex, i) => `
+    <div class="example-card">
+      <div class="example-header">
+        <div class="example-eyebrow">รายวิชาตัวอย่างที่ ${i + 1} · ${ex.type}</div>
+        <div class="example-title">${ex.course}</div>
+        <div class="example-meta">
+          <span>📚 ${ex.credit}</span>
+          <span>🎓 ${ex.year}</span>
+          <span>★ PLO หลัก: ${ex.primary_plo}</span>
+          ${ex.secondary_plo ? `<span>○ PLO รอง: ${ex.secondary_plo}</span>` : ''}
+        </div>
+      </div>
+      <div class="example-body">
+        <p class="example-desc">${ex.description}</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:8%">CLO</th>
+                <th>ข้อความ CLO รายวิชา</th>
+                <th style="width:15%">CLO กลาง</th>
+                <th style="width:15%">PLO + IRPM</th>
+                <th style="width:15%">วิธีสอน</th>
+                <th style="width:15%">การประเมิน</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${ex.course_clos.map(c => `
+                <tr>
+                  <td><strong>${c.code}</strong></td>
+                  <td>${c.statement}</td>
+                  <td style="font-family:var(--font-mono);font-size:0.85rem;color:var(--accent);font-weight:600">${c.central_clo}</td>
+                  <td>${c.plo_align}<br><small style="color:var(--text-muted)">${c.bloom}</small></td>
+                  <td>${c.teaching}</td>
+                  <td>${c.assessment}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// === CHECKLIST ===
+function renderChecklist() {
+  const items = [
+    'CLO รายวิชาทุกข้อสามารถ map กับ PLO อย่างน้อย 1 PLO',
+    'CLO รายวิชาทุกข้ออ้างอิงกับ CLO กลางของหลักสูตร',
+    'ระดับ IRPM ของ CLO รายวิชาสอดคล้องกับชั้นปีและตำแหน่งของรายวิชาในหลักสูตร',
+    'ใช้ action verb ที่วัดผลและสังเกตได้ ไม่ใช้คำกว้าง ๆ เช่น "รู้" "เข้าใจ" "ตระหนัก"',
+    'ระบุชัดเจนว่าผู้เรียนต้องทำอะไรได้เมื่อจบรายวิชา (Specific)',
+    'ระดับ Bloom ของแต่ละ CLO สอดคล้องกับระดับ IRPM ที่กำหนด',
+    'จำนวน CLO รายวิชาอยู่ในช่วง 4-7 ข้อ',
+    'CLO ครอบคลุมสาระสำคัญของรายวิชาและบรรลุได้ภายในระยะเวลา/หน่วยกิต',
+    'วิธีสอนที่เลือกตอบโจทย์ระดับ Bloom และโดเมนของ CLO',
+    'วิธีการวัดและประเมินผลตอบโจทย์ระดับ Bloom และโดเมนของ CLO',
+    'CLO ระดับ HOTS (Analyze/Evaluate/Create) ใช้การประเมินที่หลากหลาย ไม่ใช่ MCQ อย่างเดียว',
+    'CLO โดเมน Affective ใช้ BehaviorObs / ReflectiveJournal / Portfolio',
+    'CLO โดเมน Psychomotor ใช้ OSCE / DOPS / SkillChecklist',
+    'มี Rubric หรือ Checklist ที่ชัดเจนสำหรับการประเมินทุก CLO',
+    'นักศึกษาทราบเกณฑ์การประเมินตั้งแต่ต้นภาคการศึกษา',
+  ];
+  document.getElementById('checklist').innerHTML = items.map((it, i) => `<li data-idx="${i}">${it}</li>`).join('');
+  document.querySelectorAll('.checklist li').forEach(li => {
+    li.addEventListener('click', () => li.classList.toggle('checked'));
+  });
+}
+
+// === GLOBAL SEARCH ===
+function setupSearch() {
+  const input = document.getElementById('globalSearch');
+  const results = document.getElementById('searchResults');
+  
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    if (q.length < 2) { results.classList.remove('open'); return; }
+    
+    const matches = [];
+    
+    // PLOs
+    Object.entries(DATA.plos).forEach(([code, info]) => {
+      if ((code + ' ' + info.short + ' ' + info.full).toLowerCase().includes(q)) {
+        matches.push({ type: 'PLO', text: `${code} — ${info.short}`, target: 'clos', plo: code });
+      }
+    });
+    
+    // CLOs
+    Object.entries(DATA.framework).forEach(([plo, comps]) => {
+      ['Theory', 'Lab', 'Practice'].forEach(comp => {
+        (comps[comp] || []).forEach(c => {
+          if ((c.code + ' ' + c.statement).toLowerCase().includes(q)) {
+            matches.push({ type: 'CLO', text: `${c.code}: ${c.statement.slice(0, 70)}...`, target: 'clos', plo: plo });
+          }
+        });
+      });
+    });
+    
+    // Action verbs
+    Object.entries(DATA.actionVerbs).forEach(([dom, levels]) => {
+      Object.entries(levels).forEach(([lv, info]) => {
+        const allVerbs = [...info.thai, ...info.english].map(v => v.toLowerCase());
+        if (allVerbs.some(v => v.includes(q))) {
+          const matched = [...info.thai, ...info.english].filter(v => v.toLowerCase().includes(q));
+          matches.push({ type: 'คำกริยา', text: `${dom}/${lv}: ${matched.join(', ')}`, target: 'verbs' });
+        }
+      });
+    });
+    
+    if (matches.length === 0) {
+      results.innerHTML = '<div class="search-result"><div class="search-result-text" style="color:var(--text-muted)">ไม่พบผลลัพธ์</div></div>';
+    } else {
+      results.innerHTML = matches.slice(0, 12).map((m, i) => `
+        <div class="search-result" data-idx="${i}">
+          <div class="search-result-type">${m.type}</div>
+          <div class="search-result-text">${m.text}</div>
+        </div>
+      `).join('');
+      results.querySelectorAll('.search-result').forEach((el, i) => {
+        el.addEventListener('click', () => {
+          const m = matches[i];
+          if (m.plo) {
+            currentPlo = m.plo;
+            currentComponent = 'Theory';
+            renderPloTabs();
+            renderPloContent();
+          }
+          location.hash = '#' + m.target;
+          input.value = '';
+          results.classList.remove('open');
+        });
+      });
+    }
+    results.classList.add('open');
+  });
+  
+  document.addEventListener('click', e => {
+    if (!input.contains(e.target) && !results.contains(e.target)) {
+      results.classList.remove('open');
+    }
+  });
+}
+
+// === INIT ===
+document.getElementById('mobileToggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+});
+
+renderHome();
+renderTheory();
+renderVerbs();
+setupVerbFilters();
+renderPloTabs();
+renderPloContent();
+setupBuilder();
+renderExamples();
+renderChecklist();
+setupSearch();
+
+// Initial route
+routeTo(location.hash.replace('#','') || 'home');
+</script>
+</body>
+</html>
